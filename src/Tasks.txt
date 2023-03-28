@@ -1,7 +1,184 @@
-1. чтение из файла списка задач на месяц
-2. добавление удаление, изменение, отметка сделано
-3. вывод списка задач
-4. приоритеты задач
-5. сложность задач
-6. сортировка
-7. +- пару идей
+Classes:
+Tasks - Main methods: delete, add, edit, checked
+Users - 2 type, "general" and "user"
+
+Main file:
+
+Resource files:
+tasks 4 users
+
+
+
+FILES:
+#1 Users Input file. * Output - add user
+File #1 Users.txt
+Format:
+First line = Admin - SuperBoss
+Login,password
+Example: general,general
+Max 10 Symbols.
+Type: String
+Check->equals.
+
+
+#2 Tasks.txt
+Input - output file
+String commas separated
+Fields:   Id, author, executor, title,start time,finish time,priority, difficult, status, deleted
+Example:  12, Andrii, Andrii, Clean table, 31.11.2023, 03.12.2023, true, false, false ,true
+
+ID - int
+author - String - 10 symbols
+executor - String - 10 symbols
+title - String - 25 to read, all in №3.
+Start time - String - 10 symbols
+Finish time - String - 10 symbols
+Priority - boolean high - > true, low -> false
+Difficult - boolean high - > true, low -> false
+Status - boolean Yes - > true, no -> false
+deleted boolean Deleted - > true, no -> false * don't show
+
+==========================================================Classes=====================================================
+
+===========Tasks
+Fields:
+ID - int
+author - String - 10 symbols
+executor - String - 10 symbols
+title - String - 25 to read, all in №3.
+Start time - String - 10 symbols
+Finish time - String - 10 symbols
+Priority - boolean high - > true, low -> false
+Difficult - boolean high - > true, low -> false
+Status - boolean Yes - > true, no -> false
+deleted boolean Deleted - > true, no -> false * don't show
+
+Setter
+Getter
+toString
+
+ParseTaskFromFile
+
+==========Menu_TUI
+
+AllOutputs Graph + Logic
+Add Methods:
+ShowLogin
+ShowAll
+ShowMenu
+AddTask
+ReadTask
+EditTask
+Gant
+FinishTask
+Delete
+ChangeUser
+Exit
+====================================================================================================================
+=========================main
+Login();
+
+Add List - add by method ParseTaskFromFile
+
+use Methods
+
+while(true)
+Show All();
+exit - false;
+
+========================================================#0 Login (file)============================================
+First entry:
+Login - Password
+-> open/ read files - User, check Login and Password
+ if Ok
+ open & read File Tasks
+-> parse lists <objects>  list in Main
+-> close files
+
+====================================#1 ShowAll (List<Tasks>, int sortType)============================================
+Print all Users tasks according to sortType. Or all task for General
+
+=========================================#2 Gant====================================================================
+
+============================================#2 AddTask ()==============================================================
+ Add Title, date(start < finish), priority, difficult, author(auto), executor(auto for user),
+                                                                              *status(Y/N) - auto NO), ID(auto-counter)
+Rule: Only 5 Points difficult task in one day
+difficultPoints = 5
+High = 2
+Low = 1
+Check(difficultPoints)
+End -> AddTasktoList;
+
+====================================#3 ReadTask ( List <Tasks> , int ID )==============================================
+Read full title of Task and Edit
+Can change: Title, date(start < finish), priority, difficult, executor(not for user)
+
+Chose what we need to change:
+Fields:   1 - Id, 2 - executor(only General), 3 - title, 4 - start time,5 - finish time, 6- priority, 7 difficult.
+
+Getter And Setters
+
+ReRead task - if Not Ready - Edit or Save
+
+If Save - #3 show all
+
+====================================#4. FinishTasks (List <Tasks> , int ID) ==============================================
+Choose ID for finish. General can General And user, user!=general
+Change Status - boolean Yes - > No
+SetStatus(Id,true)
+
+Change status - method. Finished tasks - in the end..
+
+====================================#5 Delete task(List <Tasks> , int ID)==============================================
+5. Delete task(s) - Choose ID for delete. User can't delete, only general can delete. User must finish.
+
+Change deleted field;
+Setter
+
+====================================================6. ChangeUser======================================================
+Save File
+GOTO->0
+
+====================================================7. Exit============================================================
+Save File
+Exit program
+
+======================================================================================================================
+
+Menu:
+Class main or ShowAll - all task from parsed List
+1 Show all -> Show all Tasks -> Sorted by ID
+
+1.1  Add sort by: priority, title, date-(start < finish - *add check), author, difficult, executor.
+Sort - comparator - add tests
+
+2. Add task -> Add Title, date(start < finish), priority, difficult, author(auto), executor(auto for user),
+                                                                              *status(Y/N) - auto NO), ID(auto-counter)
+3. Read task(s) -> Read full title of Task and Edit
+                                     Can change: Title, date(start < finish), priority, difficult, executor(not for user)
+3.1 Chose what we need to change: 1 Title, date( 2. start < 3. finish), 4. priority, 5.difficult, executor (not for user)
+
+After Edit - show all
+
+4. End (finish) task(s) - > Choose ID for finish. General can General And user, user!=general
+Change status - method. Finished tasks - in the end..
+5. Delete task(s) - Choose ID for finish. User can't delete, only general can delete. User must finish.
+6. ChangeUser -> First entry: Login - Password
+7. Add p.1.1 for General Gant - 4 general
+
+6. Exit - save file
+*7.Service menu - add user. Only General can add.
+
+
+tests
+
+Methods:
+1) Checkdates start < finish
+
+2)  Check(difficultPoints)
+difficultPoints = 5
+High = 2
+Low = 1
+
+3)Change status
