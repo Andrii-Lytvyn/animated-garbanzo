@@ -1,0 +1,1 @@
+12, Andrii, Andrii, Clean table, 31.11.2023, 03.12.2023, true, false, false ,true

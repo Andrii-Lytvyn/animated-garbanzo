@@ -89,6 +89,7 @@ exit - false;
 ========================================================#0 Login (file)============================================
 First entry:
 Login - Password
+General boolean - true; user - false
 -> open/ read files - User, check Login and Password
  if Ok
  open & read File Tasks
