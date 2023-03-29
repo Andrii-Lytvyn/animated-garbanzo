@@ -1,6 +1,8 @@
 package src;
 
 import java.io.*;
+import java.util.HashMap;
+import java.util.Map;
 
 //TODO Andrey Litvin
 //fields ...
@@ -117,6 +119,28 @@ public class Task {
         ", status=" + status +
         ", deleted=" + deleted +
         ' ';
+  }
+
+  public void ShowLogin(File usersFile) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    BufferedReader inputFileReader = new BufferedReader(new FileReader(usersFile));
+    Map<String, String> users = new HashMap<>();
+
+    for (String row = inputFileReader.readLine(); row != null; row = inputFileReader.readLine()) {
+      String[] temp = row.split(SEP);
+      users.put(temp[0], temp[1]);
+    }
+    System.out.print("Введите логин: ");
+    String login = br.readLine();
+    System.out.print("Введите пароль: ");
+    String password = br.readLine();
+    if (users.get(login).equals(password)) {
+      System.out.println("Проверка пройдена");
+    } else {
+      System.err.println("Не верный логин или пароль");
+    }
+    //TODO добавить что не верно. Добавить тест
+    //TODO Исключение одинаковых пользователей
   }
 
   public void parseTaskFromFile(File tasksFile) throws IOException {
