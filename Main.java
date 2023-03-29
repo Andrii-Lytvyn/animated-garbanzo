@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-  List<Task> tasks = new ArrayList<>();
+  public List<Task> tasks = new ArrayList<>();
   public static void main(String[] args) throws IOException {
 
     try {
