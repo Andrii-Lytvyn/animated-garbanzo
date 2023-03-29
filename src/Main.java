@@ -2,6 +2,8 @@
 
 //import src.Task;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
@@ -25,12 +27,14 @@ public class Main {
       menu.printHeader();
       menu.showAll(task.tasks);
       menu.showAllMenu();
+      menu.clearAll();
 
     } catch (FileNotFoundException e) {
       System.err.println("File not found: " + e.getMessage());
     } catch (IOException e) {
       System.err.println("Input/output exception: " + e.getMessage());
+    } catch (AWTException e) {
+      throw new RuntimeException(e);
     }
-
   }
 }
