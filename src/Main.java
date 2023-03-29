@@ -25,8 +25,9 @@ public class Main {
       menu.printHeader();
       menu.showAll(task.tasks);
       menu.showAllMenu();
-      task.makeOutputFile(task.tasks);
 
+      menu.addTask(task.tasks);
+      task.makeOutputFile(task.tasks);
     } catch (FileNotFoundException e) {
       System.err.println("File not found: " + e.getMessage());
     } catch (IOException e) {

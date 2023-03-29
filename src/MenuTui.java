@@ -118,29 +118,30 @@ public class MenuTui {
     System.out.println();
     int id = task.getNewTaskId(tasks);
     System.out.println("Task ID: " + id);
-    System.out.println("Input title: ");
+    System.out.printf("Author: %s%n", Task.getUserName()); //
+    System.out.print("Input title: ");
     String title = br.readLine();
-    System.out.printf("Author: %s%n ", Task.getUserName()); //
+
     if (Task.getGeneral()) {
-      System.out.println("Input Executor: ");
+      System.out.print("Input Executor: ");
       executor = br.readLine();
     }
-    System.out.println("Input Start date (dd.MM.yyyy): ");
+    System.out.print("Input Start date (dd.MM.yyyy): ");
     String startDate = br.readLine();
-    System.out.println("Input Finish date (dd.MM.yyyy): ");
+    System.out.print("Input Finish date (dd.MM.yyyy): ");
     String finishDate = br.readLine();
-    System.out.println("Input Priority (Low/High): ");
+    System.out.print("Input Priority (Low/High): ");
     String prior = br.readLine();
-    if (prior.equals("High")) {
+    if (prior.equalsIgnoreCase("High")) {
       priority = true;
     }
-    System.out.println("Input Difficult (Low/High): ");
+    System.out.print("Input Difficult (Low/High): ");
     String diff = br.readLine();
-    if (diff.equals("High")) {
+    if (diff.equalsIgnoreCase("High")) {
       difficult = true;
     }
     boolean cycle = true;
-    System.out.println("S - SAVE Q-EXIT");
+    System.out.print("S - SAVE Q-EXIT: ");
     while (cycle) {
       String command = br.readLine();
       if(command.equals("Q")) {
@@ -148,9 +149,9 @@ public class MenuTui {
       } else if (command.equals("S")) {
         task.setID(id);
         task.setAuthor(Task.getUserName());
-        if (Task.getGeneral()) {
-          task.setExecutor(executor);
-        }
+
+        task.setExecutor(executor);
+
         task.setTitle(title);
         task.setStartTime(startDate);
         task.setFinishTime(finishDate);
