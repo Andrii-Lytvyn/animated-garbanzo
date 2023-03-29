@@ -10,8 +10,9 @@ import java.util.List;
 
 public class MenuTui {
   public static final String LINE = "------------------------------------------------------------------------------------------------------";
-  public static final String HEADER = "| ID |  Author  | Executor |         Title           |   Start  |  Finish  |Priority|Difficult|Status|";
-  public static final String SHOW_ALL_MENU = "|SORT: 1-Author 2-Executor 3-Title 4-Priority 5-Difficult 6-Status|7-READ 8-ADD 9-DEL F-FINISH G-GUNT|";
+  public static final String HEADER =        "| ID |  Author  | Executor |         Title           |   Start  |  Finish  |Priority|Difficult|Status|";
+  public static final String SHOW_ALL_MENU1 = "|SORT BY: 1-Author 2-Executor 3-Title 4-Priority 5-Difficult 6-Status 7- Start date 8 - Finish date |";
+  public static final String SHOW_ALL_MENU2 = "|COMMANDS: 1-8 SORT                                Q-QUIT  R-READ   A-ADD   D-DEL  F-FINISH   G-GUNT|";
 
   //  AllOutputs Graph + Logic
 //  Add Methods:
@@ -36,14 +37,15 @@ public class MenuTui {
 
   public void showAllMenu() {
     System.out.println(LINE);
-    System.out.println(SHOW_ALL_MENU);
+    System.out.println(SHOW_ALL_MENU1);
+    System.out.println(SHOW_ALL_MENU2);
     System.out.println(LINE);
   }
 
   public void showAll(List<Task> tasks) {
     tasks.sort(new TaskByIdComparator());
 
-    for (Task task : tasks) {
+    for (Task task : tasks) { //cut long Titles
       String title = task.getTitle();
       if (title.length() > 25) {
         title = title.substring(0, 22) + "...";
@@ -84,8 +86,10 @@ public class MenuTui {
         System.out.printf("7 - Difficult: %s%n", difficult);
         System.out.printf("8 - Status: %s%n", status);
         System.out.println();
-        System.out.println("1-8 -EDIT Fields Q-EXIT");
+        System.out.println("1-8 - EDIT Fields Q-EXIT");
       }
     }
   }
+
+
 }
