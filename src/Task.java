@@ -94,4 +94,23 @@ public class Task {
   public String getFinishTime() {
     return finishTime;
   }
+
+  @Override
+  public String toString() {
+    return "Task " +
+        "ID=" + ID +
+        ", author='" + author + '\'' +
+        ", executor='" + executor + '\'' +
+        ", title='" + title + '\'' +
+        ", startTime='" + startTime + '\'' +
+        ", finishTime='" + finishTime + '\'' +
+        ", priority=" + priority +
+        ", difficult=" + difficult +
+        ", status=" + status +
+        ", deleted=" + deleted +
+        ' ';
+  }
+
+
+
 }
