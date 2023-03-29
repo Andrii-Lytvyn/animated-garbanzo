@@ -46,7 +46,7 @@ public class Gant {
   }
 
 
-  public void printTask(String taskText, int start, int finish, int priority, int complexity) {
+  public void printTask(Task task) {
     String complSign = "---";
     String lowPriorityColor = "\u001B[46m"; // cyan background default
     String highPriorityColor = "\u001B[43m"; // yellow background default
@@ -54,31 +54,31 @@ public class Gant {
     String color = "\u001B[46m";
     String colorReset = "\u001B[0m";
 
-    if (priority == 0) {
-      color = lowPriorityColor;
-    } else if (priority == 1) {
-      color = highPriorityColor;
-    } else if (priority == 2) {
-      color = extraPriorityColor;
-    }
-
-    String[] line = new String[32];
+    String[] line = new String[32]; // 32 cells in one row
     for (int i = 1; i < line.length; ++i) {
       line[i] = "   ";
     }
-    line[0] = String.format("|%25s|", taskText);
+
+    if (task.getPriority() == false) {
+      color = lowPriorityColor;
+    } else {
+      color = highPriorityColor;
+    }
+
+    String title = task.getTitle();
+    if (title.length() > 25) {
+      title = title.substring(0, 22) + "...";
+    }
+    line[0] = String.format("|%25s|", title);
 
     complSign = color +complSign + colorReset;
-    if (complexity == 0) {
+    if (task.getDifficult() == false) {
       complSign = color + "---" + colorReset;
-    } else if (complexity == 1) {
+    } else {
       complSign = color + "===" + colorReset;
     }
-    if (complexity == 2) {
-      complSign = color + "###" + colorReset;
-    }
 
-    for (int k = start; k <= finish; ++k) {
+    for (int k = 1; k <= 31; ++k) {
       line[k] = complSign;
     }
 
@@ -87,4 +87,9 @@ public class Gant {
     }
     System.out.println("\u001B[0m");
   }
+
+  public void gantMenu(){
+    System.out.println("S - SHOW ALL TASKS,    Q - QUIT");
+  }
 }
+

@@ -5,12 +5,13 @@ package src;
 
 import com.sun.tools.javac.Main;
 
+import java.sql.SQLOutput;
 import java.text.Format;
 import java.util.List;
 
 public class MenuTui {
   public static final String LINE = "------------------------------------------------------------------------------------------------------";
-  public static final String HEADER =        "| ID |  Author  | Executor |         Title           |   Start  |  Finish  |Priority|Difficult|Status|";
+  public static final String HEADER = "| ID |  Author  | Executor |         Title           |   Start  |  Finish  |Priority|Difficult|Status|";
   public static final String SHOW_ALL_MENU1 = "|SORT BY: 1-Author 2-Executor 3-Title 4-Priority 5-Difficult 6-Status 7- Start date 8 - Finish date |";
   public static final String SHOW_ALL_MENU2 = "|COMMANDS: 1-8 SORT                                Q-QUIT  R-READ   A-ADD   D-DEL  F-FINISH   G-GUNT|";
 
@@ -91,5 +92,39 @@ public class MenuTui {
     }
   }
 
+//  public void addTaskMenu() {
+//    System.out.println();
+//    System.out.println("Task ID: " + task.getNewTaskID());
+//    System.out.println("Input title: ");
+//    readString();
+//    System.out.printf("Author: %s%n ", author)); //
+//    System.out.printf("Input Executor:");
+//
+//    System.out.printf("Input Start date: ");
+//    String startDate = readString();
+//    parceData(startDate);
+//    System.out.printf("Input Finish date: ");
+//    String finishDate = readString();
+//    parceData(finishDate);
+//    System.out.printf("Input Priority (Low/High): ");
+//    String priority = readString();
+//    parceBoolean(priority);
+//    System.out.printf("Input Difficult (Low/High): ");
+//
+//    String priority = "Low";
+//    String difficult = "Low";
+//    String status = "Executing";
+//    if (task.getPriority()) {
+//      priority = "High";
+//    }
+//    if (task.getDifficult()) {
+//      difficult = "High";
+//    }
+//    if (task.getStatus()) {
+//      status = "Finished";
+//    }
+//
+//    System.out.println("S - SAVE Q-EXIT");
+//  }
 
 }
