@@ -1,9 +1,15 @@
 
 
+//line 64 - 76
+
+
 import com.sun.tools.javac.Main;
 
 import java.awt.*;
 import java.awt.event.KeyEvent;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
 import java.sql.SQLOutput;
 import java.text.Format;
 import java.util.List;
@@ -99,39 +105,65 @@ public class MenuTui {
     }
   }
 
-//  public void addTaskMenu() {
-//    System.out.println();
-//    System.out.println("Task ID: " + task.getNewTaskID());
-//    System.out.println("Input title: ");
-//    readString();
-//    System.out.printf("Author: %s%n ", author)); //
-//    System.out.printf("Input Executor:");
-//
-//    System.out.printf("Input Start date: ");
-//    String startDate = readString();
-//    parceData(startDate);
-//    System.out.printf("Input Finish date: ");
-//    String finishDate = readString();
-//    parceData(finishDate);
-//    System.out.printf("Input Priority (Low/High): ");
-//    String priority = readString();
-//    parceBoolean(priority);
-//    System.out.printf("Input Difficult (Low/High): ");
-//
-//    String priority = "Low";
-//    String difficult = "Low";
-//    String status = "Executing";
-//    if (task.getPriority()) {
-//      priority = "High";
-//    }
-//    if (task.getDifficult()) {
-//      difficult = "High";
-//    }
-//    if (task.getStatus()) {
-//      status = "Finished";
-//    }
-//
-//    System.out.println("S - SAVE Q-EXIT");
-//  }
+  public void addTask(List<Task> tasks) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+
+    Task task = new Task();
+    boolean priority = false;
+    boolean difficult = false;
+    boolean status = false;
+    boolean deleted = false;
+    String executor = Task.getUserName();
+
+    System.out.println();
+    int id = task.getNewTaskId(tasks);
+    System.out.println("Task ID: " + id);
+    System.out.println("Input title: ");
+    String title = br.readLine();
+    System.out.printf("Author: %s%n ", Task.getUserName()); //
+    if (Task.getGeneral()) {
+      System.out.println("Input Executor: ");
+      executor = br.readLine();
+    }
+    System.out.println("Input Start date (dd.MM.yyyy): ");
+    String startDate = br.readLine();
+    System.out.println("Input Finish date (dd.MM.yyyy): ");
+    String finishDate = br.readLine();
+    System.out.println("Input Priority (Low/High): ");
+    String prior = br.readLine();
+    if (prior.equals("High")) {
+      priority = true;
+    }
+    System.out.println("Input Difficult (Low/High): ");
+    String diff = br.readLine();
+    if (diff.equals("High")) {
+      difficult = true;
+    }
+    boolean cycle = true;
+    System.out.println("S - SAVE Q-EXIT");
+    while (cycle) {
+      String command = br.readLine();
+      if(command.equals("Q")) {
+        return;
+      } else if (command.equals("S")) {
+        task.setID(id);
+        task.setAuthor(Task.getUserName());
+        if (Task.getGeneral()) {
+          task.setExecutor(executor);
+        }
+        task.setTitle(title);
+        task.setStartTime(startDate);
+        task.setFinishTime(finishDate);
+        task.setPriority(priority);
+        task.setDifficult(difficult);
+        task.setStatus(status);
+        task.setDeleted(deleted);
+        tasks.add(task);
+        return;
+      }
+    }
+
+
+  }
 
 }
