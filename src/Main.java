@@ -1,12 +1,8 @@
 
 
-import java.awt.*;
-import java.awt.event.KeyEvent;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Main {
 
@@ -17,7 +13,7 @@ public class Main {
       File tasksFile = new File("src/rsc/Tasks.txt");
       File usersFile = new File("src/rsc/Users.txt");
 
-      task.ShowLogin(usersFile);
+      task.showLogin(usersFile);
 
 
       task.parseTaskFromFile(tasksFile);
@@ -25,6 +21,7 @@ public class Main {
       menu.printHeader();
       menu.showAll(task.tasks);
       menu.showAllMenu();
+      menu.changeUser();
 
       menu.addTask(task.tasks);
       task.makeOutputFile(task.tasks);

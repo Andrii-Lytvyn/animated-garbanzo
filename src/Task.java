@@ -158,7 +158,7 @@ public class Task {
   }
 
 //TODO не верный пользователь стоп или цикл
-  public void ShowLogin(File usersFile) throws IOException {
+  public void showLogin(File usersFile) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     BufferedReader inputFileReader = new BufferedReader(new FileReader(usersFile));
     Map<String, String> users = new HashMap<>();

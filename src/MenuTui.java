@@ -8,6 +8,7 @@ import com.sun.tools.javac.Main;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
+import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.sql.SQLOutput;
@@ -18,7 +19,8 @@ public class MenuTui {
   public static final String LINE = "------------------------------------------------------------------------------------------------------";
   public static final String HEADER = "| ID |  Author  | Executor |         Title           |   Start  |  Finish  |Priority|Difficult|Status|";
   public static final String SHOW_ALL_MENU1 = "|SORT BY: 1-Author 2-Executor 3-Title 4-Priority 5-Difficult 6-Status 7- Start date 8 - Finish date |";
-  public static final String SHOW_ALL_MENU2 = "|COMMANDS: 1-8 SORT                                Q-QUIT  R-READ   A-ADD   D-DEL  F-FINISH   G-GUNT|";
+  public static final String SHOW_ALL_MENU_GENERAL = "|COMMANDS: 1-8 SORT            | C-CHANGE USER | Q-QUIT | R-READ | A-ADD | D-DEL | F-FINISH | G-GUNT|";
+  public static final String SHOW_ALL_MENU_USER = "|COMMANDS: 1-8 SORT                    | C-CHANGE USER | Q-QUIT | R-READ | A-ADD | D-DEL | F-FINISH |";
 
   public void clearAll() throws AWTException {
     Robot r = new Robot();
@@ -52,8 +54,19 @@ public class MenuTui {
   public void showAllMenu() {
     System.out.println(LINE);
     System.out.println(SHOW_ALL_MENU1);
-    System.out.println(SHOW_ALL_MENU2);
+    if(Task.getGeneral()){
+      System.out.println(SHOW_ALL_MENU_GENERAL);
+    } else {
+      System.out.println(SHOW_ALL_MENU_USER);
+    }
     System.out.println(LINE);
+  }
+  public void changeUser() throws IOException {
+    Task task = new Task();
+    File usersFile = new File("src/rsc/Users.txt");
+
+    task.showLogin(usersFile);
+
   }
 
   public void showAll(List<Task> tasks) {
