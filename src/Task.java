@@ -93,9 +93,13 @@ public class Task {
     return title;
   }
 
-  public boolean getPriority() {return priority;}
+  public boolean getPriority() {
+    return priority;
+  }
 
-  public boolean getDifficult() {return difficult;}
+  public boolean getDifficult() {
+    return difficult;
+  }
 
   public String getExecutor() {
     return executor;
@@ -108,6 +112,8 @@ public class Task {
   public String getFinishTime() {
     return finishTime;
   }
+
+  public boolean getStatus() { return status; }
 
   @Override
   public String toString() {
