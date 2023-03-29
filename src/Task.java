@@ -1,10 +1,7 @@
 package src;
 
 import java.io.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 //TODO Andrey Litvin
 //fields ...
@@ -24,6 +21,9 @@ public class Task {
   private boolean deleted;
 
   public List<Task> tasks = new ArrayList<>();
+
+  private static boolean general = false;
+  private static String userName;
 
   public Task(int ID, String author, String executor, String title, String startTime,
               String finishTime, boolean priority, boolean difficult, boolean status,
@@ -83,6 +83,22 @@ public class Task {
 
   public void setDeleted(boolean deleted) {
     this.deleted = deleted;
+  }
+
+  public static String getUserName() {
+    return userName;
+  }
+
+  public static void setUserName(String userName) {
+    Task.userName = userName;
+  }
+
+  public static void setGeneral(boolean general) {
+    Task.general = general;
+  }
+
+  public static boolean getGeneral() {
+    return general;
   }
 
   public String getAuthor() {
@@ -149,16 +165,28 @@ public class Task {
     for (String row = inputFileReader.readLine(); row != null; row = inputFileReader.readLine()) {
       String[] temp = row.split(SEP);
       users.put(temp[0], temp[1]);
+
+
+
     }
     System.out.print("Введите логин: ");
     String login = br.readLine();
     System.out.print("Введите пароль: ");
     String password = br.readLine();
+  try {
     if (users.get(login).equals(password)) {
       System.out.println("Проверка пройдена");
+      setUserName(login);
+      if(login.equals("general")){setGeneral(true);}
+
     } else {
       System.err.println("Не верный логин или пароль");
     }
+  }catch (NullPointerException e) {
+    System.err.println("Пользователь не обнаружен" + e.getMessage());
+  }
+//    System.out.println(" генерал " + getGeneral());
+//    System.out.println(" пользователь " + getUserName());
     //TODO добавить что не верно. Добавить тест
     //TODO Исключение одинаковых пользователей
   }

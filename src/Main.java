@@ -17,7 +17,7 @@ public class Main {
       File tasksFile = new File("src/rsc/Tasks.txt");
       File usersFile = new File("src/rsc/Users.txt");
 
-      //task.ShowLogin(usersFile);
+      task.ShowLogin(usersFile);
 
 
       task.parseTaskFromFile(tasksFile);
