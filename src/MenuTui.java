@@ -48,7 +48,7 @@ public class MenuTui {
       if (title.length() > 25) {
         title = title.substring(0, 22) + "...";
       }
-      if (task.getDeleted) {
+      if (task.getDeleted()) {
         continue;
       }
       String taskRow = String.format("|%4d|%10s|%10s|%25s|%10s|%10s|%8s|%9s|%6s|",

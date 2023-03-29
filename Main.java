@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Main {
-  public List<Task> tasks = new ArrayList<>();
+
   public static void main(String[] args) throws IOException {
 
     try {
@@ -19,6 +19,7 @@ public class Main {
 
 
       task.parseTaskFromFile(tasksFile);
+
     } catch (FileNotFoundException e) {
       System.err.println("File not found: " + e.getMessage());
     } catch (IOException e) {

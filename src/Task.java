@@ -1,7 +1,9 @@
 package src;
 
 import java.io.*;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 //TODO Andrey Litvin
@@ -20,6 +22,8 @@ public class Task {
   private boolean difficult;
   private boolean status;
   private boolean deleted;
+
+  public List<Task> tasks = new ArrayList<>();
 
   public Task(int ID, String author, String executor, String title, String startTime,
               String finishTime, boolean priority, boolean difficult, boolean status,
@@ -113,7 +117,13 @@ public class Task {
     return finishTime;
   }
 
-  public boolean getStatus() { return status; }
+  public boolean getStatus() {
+    return status;
+  }
+
+  public boolean getDeleted() {
+    return deleted;
+  }
 
   @Override
   public String toString() {
@@ -155,19 +165,23 @@ public class Task {
 
   public void parseTaskFromFile(File tasksFile) throws IOException {
 
+
     BufferedReader inputFileReader = new BufferedReader(new FileReader(tasksFile));
     for (String row = inputFileReader.readLine(); row != null; row = inputFileReader.readLine()) {
       String[] temp = row.split(SEP);
-      setID(Integer.parseInt(temp[0]));
-      setAuthor(temp[1]);
-      setExecutor(temp[2]);
-      setTitle(temp[3]);
-      setStartTime(temp[4]);
-      setFinishTime(temp[5]);
-      setPriority(Boolean.parseBoolean(temp[6]));
-      setDifficult(Boolean.parseBoolean(temp[7]));
-      setStatus(Boolean.parseBoolean(temp[8]));
-      setDeleted(Boolean.parseBoolean(temp[9]));
+      Task task = new Task();
+
+      task.setID(Integer.parseInt(temp[0]));
+      task.setAuthor(temp[1]);
+      task.setExecutor(temp[2]);
+      task.setTitle(temp[3]);
+      task.setStartTime(temp[4]);
+      task.setFinishTime(temp[5]);
+      task.setPriority(Boolean.parseBoolean(temp[6]));
+      task.setDifficult(Boolean.parseBoolean(temp[7]));
+      task.setStatus(Boolean.parseBoolean(temp[8]));
+      task.setDeleted(Boolean.parseBoolean(temp[9]));
+      tasks.add(task);
     }
   }
 }
