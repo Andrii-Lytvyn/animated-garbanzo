@@ -1,8 +1,12 @@
 package src;
+
+import java.io.*;
+
 //TODO Andrey Litvin
 //fields ...
 // line 43 - 60
 public class Task {
+  final public static String SEP = ",";
 
   private int ID;
   private String author;
@@ -15,26 +19,30 @@ public class Task {
   private boolean status;
   private boolean deleted;
 
-  private Task(int ID,String author,String executor,String title,String startTime,
-  String finishTime,boolean priority,boolean difficult,boolean status,
-  boolean deleted)
-  {
-    this.ID=ID;
-    this.author=author;
+  public Task(int ID, String author, String executor, String title, String startTime,
+              String finishTime, boolean priority, boolean difficult, boolean status,
+              boolean deleted) {
+    this.ID = ID;
+    this.author = author;
     this.executor = executor;
-    this.title=title;
-    this.startTime=startTime;
-    this.finishTime=finishTime;
-    this.priority=priority;
-    this.difficult=difficult;
-    this.status=status;
-    this.deleted=deleted;
+    this.title = title;
+    this.startTime = startTime;
+    this.finishTime = finishTime;
+    this.priority = priority;
+    this.difficult = difficult;
+    this.status = status;
+    this.deleted = deleted;
+  }
+
+  public Task() {
+
   }
 
 
   public void setID(int ID) {
     this.ID = ID;
   }
+
   public void setAuthor(String author) {
     this.author = author;
   }
@@ -111,6 +119,21 @@ public class Task {
         ' ';
   }
 
+  public void parseTaskFromFile(File tasksFile) throws IOException {
 
-
+    BufferedReader inputFileReader = new BufferedReader(new FileReader(tasksFile));
+    for (String row = inputFileReader.readLine(); row != null; row = inputFileReader.readLine()) {
+      String[] temp = row.split(SEP);
+      setID(Integer.parseInt(temp[0]));
+      setAuthor(temp[1]);
+      setExecutor(temp[2]);
+      setTitle(temp[3]);
+      setStartTime(temp[4]);
+      setFinishTime(temp[5]);
+      setPriority(Boolean.parseBoolean(temp[6]));
+      setDifficult(Boolean.parseBoolean(temp[7]));
+      setStatus(Boolean.parseBoolean(temp[8]));
+      setDeleted(Boolean.parseBoolean(temp[9]));
+    }
+  }
 }

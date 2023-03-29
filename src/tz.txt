@@ -41,7 +41,7 @@ deleted boolean Deleted - > true, no -> false * don't show
 ==========================================================Classes=====================================================
 
 ===========Tasks
-Fields:
+Fields: (+)
 ID - int
 author - String - 10 symbols
 executor - String - 10 symbols
@@ -53,11 +53,12 @@ Difficult - boolean high - > true, low -> false
 Status - boolean Yes - > true, no -> false
 deleted boolean Deleted - > true, no -> false * don't show
 
-Setter
-Getter
-toString
+Setter (+)
+Getter (+)
+toString (+)
 
 ParseTaskFromFile
+-add tryCatch File not found - les 32
 
 ==========Menu_TUI
 
