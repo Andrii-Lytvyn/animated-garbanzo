@@ -57,7 +57,7 @@ Setter (+)
 Getter (+)
 toString (+)
 
-ParseTaskFromFile
+ParseTaskFromFile(+-)
 -add tryCatch File not found - les 32
 
 ==========Menu_TUI
