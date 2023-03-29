@@ -27,14 +27,11 @@ public class Main {
       menu.printHeader();
       menu.showAll(task.tasks);
       menu.showAllMenu();
-      menu.clearAll();
 
     } catch (FileNotFoundException e) {
       System.err.println("File not found: " + e.getMessage());
     } catch (IOException e) {
       System.err.println("Input/output exception: " + e.getMessage());
-    } catch (AWTException e) {
-      throw new RuntimeException(e);
     }
   }
 }
