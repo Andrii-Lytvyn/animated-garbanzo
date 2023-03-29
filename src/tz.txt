@@ -1,8 +1,8 @@
 Classes:
-Tasks - Main methods: delete, add, edit, checked
+Tasks - src.Main methods: delete, add, edit, checked
 Users - 2 type, "general" and "user"
 
-Main file:
+src.Main file:
 
 Resource files:
 tasks 4 users
@@ -94,7 +94,7 @@ General boolean - true; user - false
 -> open/ read files - User, check Login and Password
  if Ok
  open & read File Tasks
--> parse lists <objects>  list in Main
+-> parse lists <objects>  list in src.Main
 -> close files
 
 ====================================#1 ShowAll (List<Tasks>, int sortType)============================================

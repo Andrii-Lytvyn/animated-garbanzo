@@ -1,3 +1,5 @@
+package src;
+
 import src.Task;
 
 import java.io.File;
@@ -15,10 +17,14 @@ public class Main {
       File tasksFile = new File("src/rsc/Tasks.txt");
       File usersFile = new File("src/rsc/Users.txt");
 
-      task.ShowLogin(usersFile);
+      //task.ShowLogin(usersFile);
 
 
       task.parseTaskFromFile(tasksFile);
+      MenuTui menu = new MenuTui();
+      menu.printHeader();
+      menu.showAll(task.tasks);
+      menu.showAllMenu();
 
     } catch (FileNotFoundException e) {
       System.err.println("File not found: " + e.getMessage());
