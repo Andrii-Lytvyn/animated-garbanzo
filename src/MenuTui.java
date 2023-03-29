@@ -48,10 +48,41 @@ public class MenuTui {
       if (title.length() > 25) {
         title = title.substring(0, 22) + "...";
       }
+      if (task.getDeleted) {
+        continue;
+      }
       String taskRow = String.format("|%4d|%10s|%10s|%25s|%10s|%10s|%8s|%9s|%6s|",
           task.getID(), task.getAuthor(), task.getExecutor(), title, task.getStartTime(),
           task.getFinishTime(), task.getPriority(), task.getDifficult(), task.getStatus());
       System.out.println(taskRow);
+    }
+  }
+
+  public void readTask(List<Task> tasks, int id) {
+    for (Task task : tasks) {
+      if (task.getID() == id) {
+        System.out.println("Task ID: " + task.getID());
+        System.out.println("Title: ");
+        System.out.println(task.getTitle());
+        System.out.printf("Author: %s Executor: %s%n", task.getAuthor(), task.getExecutor());
+        System.out.printf("Start date: %s Finish date: %s%n",
+            task.getStartTime(), task.getFinishTime());
+        String priority = "Low";
+        String difficult = "Low";
+        String status = "Executing";
+        if (task.getPriority()) {
+          priority = "High";
+        }
+        if (task.getDifficult()) {
+          difficult = "High";
+        }
+        if (task.getStatus()) {
+          status = "Finished";
+        }
+        System.out.printf("Priority: %s Difficult: %s Status: %s%n", priority, difficult, status);
+        System.out.println();
+        System.out.println("1-EDIT 2-EXIT");
+      }
     }
   }
 }
