@@ -25,8 +25,6 @@ public class Main {
       menu.printHeader();
       menu.showAll(task.tasks);
       menu.showAllMenu();
-//      int numer = task.getNewTaskId(task.tasks);
-//      System.out.println(numer);
 
     } catch (FileNotFoundException e) {
       System.err.println("File not found: " + e.getMessage());
