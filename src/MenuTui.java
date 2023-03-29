@@ -1,10 +1,12 @@
-//package src;
+
 
 //line 64 - 76
 
 
 import com.sun.tools.javac.Main;
 
+import java.awt.*;
+import java.awt.event.KeyEvent;
 import java.sql.SQLOutput;
 import java.text.Format;
 import java.util.List;
@@ -14,6 +16,14 @@ public class MenuTui {
   public static final String HEADER = "| ID |  Author  | Executor |         Title           |   Start  |  Finish  |Priority|Difficult|Status|";
   public static final String SHOW_ALL_MENU1 = "|SORT BY: 1-Author 2-Executor 3-Title 4-Priority 5-Difficult 6-Status 7- Start date 8 - Finish date |";
   public static final String SHOW_ALL_MENU2 = "|COMMANDS: 1-8 SORT                                Q-QUIT  R-READ   A-ADD   D-DEL  F-FINISH   G-GUNT|";
+
+  public void clearAll() throws AWTException {
+    Robot r = new Robot();
+    r.keyPress(KeyEvent.VK_CONTROL);
+    r.keyPress(KeyEvent.VK_Q);
+    r.keyRelease(KeyEvent.VK_CONTROL);
+    r.keyRelease(KeyEvent.VK_Q);
+  }
 
   //  AllOutputs Graph + Logic
 //  Add Methods:
