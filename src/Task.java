@@ -157,7 +157,7 @@ public class Task {
         ' ';
   }
 
-
+//TODO не верный пользователь стоп или цикл
   public void ShowLogin(File usersFile) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     BufferedReader inputFileReader = new BufferedReader(new FileReader(usersFile));
@@ -181,9 +181,11 @@ public class Task {
 
       } else {
         System.err.println("Incorrect login or password");
+
       }
     } catch (NullPointerException e) {
       System.err.println("User is not detected: " + e.getMessage());
+
     }
 //    System.out.println(" генерал " + getGeneral());
 //    System.out.println(" пользователь " + getUserName());
@@ -192,8 +194,6 @@ public class Task {
   }
 
   public void parseTaskFromFile(File tasksFile) throws IOException {
-
-
     BufferedReader inputFileReader = new BufferedReader(new FileReader(tasksFile));
     for (String row = inputFileReader.readLine(); row != null; row = inputFileReader.readLine()) {
       String[] temp = row.split(SEP);
@@ -211,12 +211,13 @@ public class Task {
       task.setDeleted(Boolean.parseBoolean(temp[9]));
       tasks.add(task);
     }
+    inputFileReader.close();
   }
 
   public int getNewTaskId(List<Task> tasks) {
     int max = 1;
     for (Task t : tasks) {
-      if (t.ID > max) {
+      if (t.ID >= max) {
         max = t.ID + 1;
       }
     }
@@ -231,7 +232,7 @@ public class Task {
 
   public void makeOutputFile(List<Task> tasks) throws IOException {
     try {
-      FileWriter fileWriter = new FileWriter("src/rsc/Output.txt");
+        FileWriter fileWriter = new FileWriter("src/rsc/Tasks.txt");
       for (Task t : tasks) {
         fileWriter.write(t.listToFile());
 

@@ -28,6 +28,7 @@ public class Main {
 
       menu.addTask(task.tasks);
       task.makeOutputFile(task.tasks);
+      menu.showAll(task.tasks);
     } catch (FileNotFoundException e) {
       System.err.println("File not found: " + e.getMessage());
     } catch (IOException e) {

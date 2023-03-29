@@ -144,9 +144,9 @@ public class MenuTui {
     System.out.print("S - SAVE Q-EXIT: ");
     while (cycle) {
       String command = br.readLine();
-      if(command.equals("Q")) {
+      if(command.equalsIgnoreCase("Q")) {
         return;
-      } else if (command.equals("S")) {
+      } else if (command.equalsIgnoreCase("S")) {
         task.setID(id);
         task.setAuthor(Task.getUserName());
 
