@@ -1,8 +1,5 @@
 
 
-//line 64 - 76
-
-
 import com.sun.tools.javac.Main;
 
 import java.awt.*;

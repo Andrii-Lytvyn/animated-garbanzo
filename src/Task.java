@@ -157,6 +157,7 @@ public class Task {
         ' ';
   }
 
+
   public void ShowLogin(File usersFile) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     BufferedReader inputFileReader = new BufferedReader(new FileReader(usersFile));
@@ -166,23 +167,23 @@ public class Task {
       String[] temp = row.split(SEP);
       users.put(temp[0], temp[1]);
     }
-    System.out.print("Введите логин: ");
+    System.out.print("Login: ");
     String login = br.readLine();
-    System.out.print("Введите пароль: ");
+    System.out.print("Password: ");
     String password = br.readLine();
     try {
       if (users.get(login).equals(password)) {
-        System.out.println("Проверка пройдена");
+        System.out.println("Passed");
         setUserName(login);
         if (login.equals("general")) {
           setGeneral(true);
         }
 
       } else {
-        System.err.println("Не верный логин или пароль");
+        System.err.println("Incorrect login or password");
       }
     } catch (NullPointerException e) {
-      System.err.println("Пользователь не обнаружен: " + e.getMessage());
+      System.err.println("User is not detected: " + e.getMessage());
     }
 //    System.out.println(" генерал " + getGeneral());
 //    System.out.println(" пользователь " + getUserName());
@@ -216,11 +217,30 @@ public class Task {
     int max = 1;
     for (Task t : tasks) {
       if (t.ID > max) {
-        max = t.ID+1;
+        max = t.ID + 1;
       }
     }
     return max;
   }
 
+  public String listToFile() {
+    return ID + "," + author + "," + executor + "," + title + "," + startTime + "," + finishTime + "," +
+        priority + "," + difficult + "," + status + "," + deleted + "\n";
+  }
 
+
+  public void makeOutputFile(List<Task> tasks) throws IOException {
+    try {
+      FileWriter fileWriter = new FileWriter("src/rsc/Output.txt");
+      for (Task t : tasks) {
+        fileWriter.write(t.listToFile());
+
+      }
+      fileWriter.close();
+    } catch (FileNotFoundException e) {
+      System.err.println("File not found: " + e.getMessage());
+    } catch (IOException e) {
+      System.err.println("Input/output exception: " + e.getMessage());
+    }
+  }
 }
