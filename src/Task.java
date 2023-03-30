@@ -157,7 +157,7 @@ public class Task {
         ' ';
   }
 
-//TODO не верный пользователь стоп или цикл
+  //TODO не верный пользователь стоп или цикл
   public void showLogin(File usersFile) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     BufferedReader inputFileReader = new BufferedReader(new FileReader(usersFile));
@@ -181,11 +181,11 @@ public class Task {
 
       } else {
         System.err.println("Incorrect login or password");
-
+        System.exit(1);
       }
     } catch (NullPointerException e) {
       System.err.println("User is not detected: " + e.getMessage());
-
+      System.exit(1);
     }
     //TODO добавить что не верно. Добавить тест
     //TODO Исключение одинаковых пользователей
@@ -230,9 +230,9 @@ public class Task {
 
   public void makeOutputFile(List<Task> tasks) throws IOException {
     try {
-        FileWriter fileWriter = new FileWriter("src/rsc/Tasks.txt");
+      FileWriter fileWriter = new FileWriter("src/rsc/Tasks.txt");
       for (Task t : tasks) {
-        if(!t.deleted) {
+        if (!t.deleted) {
           fileWriter.write(t.listToFile());
         }
       }
