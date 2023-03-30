@@ -254,5 +254,19 @@ public class MenuTui {
       }
     }
   }
+
+  public static void finishTask(List<Task> tasks) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    System.out.print("Input task ID to mark FINISHED:");
+    int id = Integer.parseInt(br.readLine());
+    tasks.get(id).setStatus(true);
+  }
+
+  public static void deleteTask(List<Task> tasks) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    System.out.print("Input task ID to DELETE:");
+    int id = Integer.parseInt(br.readLine());
+    tasks.get(id).setDeleted(true);
+  }
 }
 
