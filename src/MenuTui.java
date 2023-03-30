@@ -53,11 +53,17 @@ public class MenuTui{
         case "1": {
           Comparator<Task> comparator = new TaskByAutorComparator();
           tasks.sort(comparator);
+          printHeader();
+          showAll(tasks);
+          showAllMenu();
           break;
         }
         case "2": {
           Comparator<Task> comparator = new TaskByExecutorComparator();
           tasks.sort(comparator);
+          printHeader();
+          showAll(tasks);
+          showAllMenu();
           break;
         }
         case "3": {
