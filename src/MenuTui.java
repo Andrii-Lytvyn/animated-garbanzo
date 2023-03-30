@@ -69,36 +69,57 @@ public class MenuTui{
         case "3": {
           Comparator<Task> comparator = new TaskByTitleComparator();
           tasks.sort(comparator);
+          printHeader();
+          showAll(tasks);
+          showAllMenu();
           break;
         }
         case "4": {
           Comparator<Task> comparator = new TaskByPriorityComparator();
           tasks.sort(comparator);
+          printHeader();
+          showAll(tasks);
+          showAllMenu();
           break;
         }
         case "5": {
           Comparator<Task> comparator = new TaskByDifficultComparator();
           tasks.sort(comparator);
+          printHeader();
+          showAll(tasks);
+          showAllMenu();
           break;
         }
         case "6": {
           Comparator<Task> comparator = new TaskByStatusComparator();
           tasks.sort(comparator);
+          printHeader();
+          showAll(tasks);
+          showAllMenu();
           break;
         }
         case "7": {
           Comparator<Task> comparator = new TaskByStartDateComparator();
           tasks.sort(comparator);
+          printHeader();
+          showAll(tasks);
+          showAllMenu();
           break;
         }
         case "8": {
           Comparator<Task> comparator = new TaskByFinishDateComparator();
           tasks.sort(comparator);
+          printHeader();
+          showAll(tasks);
+          showAllMenu();
           break;
         }
         case "9": {
           Comparator<Task> comparator1 = new TaskByIdComparator();
           tasks.sort(comparator1);
+          printHeader();
+          showAll(tasks);
+          showAllMenu();
           break;
         }
         case "C": {
