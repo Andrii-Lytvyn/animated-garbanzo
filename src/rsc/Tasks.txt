@@ -1,10 +1,9 @@
 1,Mr.Fox,Mr.Fox,Clean table,01.02.2023,03.02.2023,true,false,false,false
 2,Mr.Fox,Paspartu,Add Try-Catch,04.02.2023,05.02.2023,true,true,false,false
-3,Mr.Fox,Paspartu,wash the car,05.02.2023,06.02.2023,true,true,true,false
 4,Paspartu,Paspartu,Wash MR.Fox's CAR!!!,05.02.2023,06.02.2023,true,true,false,false
 5,Mr.Fox,Paspartu,go home,07.02.2023,07.02.2023,false,false,false,false
 6,Paspartu,Paspartu,Buy Milk,08.02.2023,08.02.2023,false,true,true,false
 7,general,user,eat apple,01.02.2023,02.02.2023,true,false,false,false
-7,general,user,eat user,10.02.2023,11.02.2332,true,false,false,false
 7,general,user,testID,test,test,false,false,false,false
 8,user,user,eatGeneral,test,test,false,false,false,false
+9,general,Andrii,add delete,10.01.2003,20.02.2012,false,false,false,false

@@ -187,8 +187,6 @@ public class Task {
       System.err.println("User is not detected: " + e.getMessage());
 
     }
-//    System.out.println(" генерал " + getGeneral());
-//    System.out.println(" пользователь " + getUserName());
     //TODO добавить что не верно. Добавить тест
     //TODO Исключение одинаковых пользователей
   }
@@ -234,8 +232,9 @@ public class Task {
     try {
         FileWriter fileWriter = new FileWriter("src/rsc/Tasks.txt");
       for (Task t : tasks) {
-        fileWriter.write(t.listToFile());
-
+        if(!t.deleted) {
+          fileWriter.write(t.listToFile());
+        }
       }
       fileWriter.close();
     } catch (FileNotFoundException e) {
