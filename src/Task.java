@@ -163,6 +163,7 @@ public class Task {
       users.put(temp[0], temp[1]);
       userNames.add(temp[0]);
     }
+    System.out.println();
     System.out.print("Login: ");
     String login = br.readLine();
     System.out.print("Password: ");
@@ -185,10 +186,10 @@ public class Task {
     } catch (NullPointerException e) {
       System.err.println("User is not detected.");
       System.out.println();
-      //System.exit(1);
       showLogin(usersFile, tasksFile);
     } catch (AWTException e) {
       throw new RuntimeException(e);
+
     }
     //TODO перед изменением пользователя записать файл
   }

@@ -409,5 +409,14 @@ public class MenuTui {
     }
     return result;
   }
+  public static void mainMenu(MenuTui menu, Task task) throws IOException, ParseException, AWTException {
+    menu.clearAll();
+    System.out.println();
+    menu.printHeader();
+    menu.showAll(task.tasks);
+    menu.showAllMenu();
+    menu.mainMenu(task.tasks);
+
+  }
 }
 
