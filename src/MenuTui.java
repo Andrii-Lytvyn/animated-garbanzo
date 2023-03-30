@@ -164,7 +164,7 @@ public class MenuTui {
     }
   }
 
-  public void printHeader() {
+  public static void printHeader() {
     System.out.println(LINE);
     System.out.println(HEADER);
     System.out.println(LINE);
@@ -187,13 +187,11 @@ public class MenuTui {
     File tasksFile = new File("src/rsc/Tasks.txt");
     task.makeOutputFile(tasks);
     task.showLogin(usersFile, tasksFile);
-
-
   }
 
   public static void showAll(List<Task> tasks) {
-    tasks.sort(new TaskByIdComparator());
 
+    tasks.sort(new TaskByIdComparator());
     for (Task task : tasks) { //cut long Titles
       String title = task.getTitle();
       if (title.length() > 25) {
