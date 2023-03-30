@@ -1,8 +1,6 @@
 import java.text.DateFormat;
-import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Collections;
 import java.util.Comparator;
 import java.util.Date;
 import java.awt.*;
@@ -46,9 +44,10 @@ public class MenuTui {
 //  ChangeUser -- Andrii Golik
 //  Exit   -- Andrii Golik!!!
 
-  public void mainMenu(List<Task> tasks) throws IOException, ParseException {
+  public void taskMenu(List<Task> tasks) throws IOException, ParseException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     while (true) {
+      System.out.print("Choose command: ");
       String key = br.readLine();
       switch (key) {
         case "1": {
@@ -145,6 +144,7 @@ public class MenuTui {
           if (checkIdInRange(tasks, id)) {
             readTask(tasks, id);
           }
+
           break;
         }
         case "g": {

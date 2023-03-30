@@ -33,7 +33,6 @@ public class Main {
     menu.printHeader();
     menu.showAll(task.tasks);
     menu.showAllMenu();
-    menu.mainMenu(task.tasks);
-
+    menu.taskMenu(task.tasks);
   }
 }
