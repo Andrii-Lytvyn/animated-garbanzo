@@ -14,17 +14,12 @@ public class Main {
       File tasksFile = new File("src/rsc/Tasks.txt");
       File usersFile = new File("src/rsc/Users.txt");
       task.showLogin(usersFile,tasksFile);
-     // task.parseTaskFromFile(tasksFile);
       MenuTui menu = new MenuTui();
       menu.printHeader();
       menu.showAll(task.tasks);
       menu.showAllMenu();
       menu.mainMenu(task.tasks);
-      menu.changeUser(task.tasks);
 
-      menu.addTask(task.tasks);
-      task.makeOutputFile(task.tasks);
-      menu.showAll(task.tasks);
     } catch (FileNotFoundException e) {
       System.err.println("File not found: " + e.getMessage());
     } catch (IOException e) {

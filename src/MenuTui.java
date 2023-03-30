@@ -14,13 +14,14 @@ import java.io.InputStreamReader;
 
 import java.util.List;
 
-public class MenuTui{
+public class MenuTui {
   public static DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
   public static final String LINE = "------------------------------------------------------------------------------------------------------";
   public static final String HEADER = "| ID |  Author  | Executor |         Title           |   Start  |  Finish  |Priority|Difficult|Status|";
   public static final String SHOW_ALL_MENU1 = "|SORT BY: 1-Author 2-Executor 3-Title 4-Priority 5-Difficult 6-Status 7-StartDate 8-FinishDate 9-Id |";
   public static final String SHOW_ALL_MENU_GENERAL = "|COMMANDS: 1-8 SORT            | C-CHANGE USER | Q-QUIT | R-READ | A-ADD | D-DEL | F-FINISH | G-GUNT|";
   public static final String SHOW_ALL_MENU_USER = "|COMMANDS: 1-8 SORT                    | C-CHANGE USER | Q-QUIT | R-READ | A-ADD | D-DEL | F-FINISH |";
+  public static Task task = new Task();
 
   public void clearAll() throws AWTException {
     Robot r = new Robot();
@@ -122,23 +123,23 @@ public class MenuTui{
           showAllMenu();
           break;
         }
-        case "C": {
+        case "c": {
           changeUser(tasks);
           break;
         }
-        case "A": {
+        case "a": {
           addTask(tasks);
           break;
         }
-        case "D": {
+        case "d": {
           deleteTask(tasks);
           break;
         }
-        case "F": {
+        case "f": {
           finishTask(tasks);
           break;
         }
-        case "R": {
+        case "r": {
           System.out.print("Input task ID to READ:");
           int id = Integer.parseInt(br.readLine());
           if (checkIdInRange(tasks, id)) {
@@ -146,17 +147,17 @@ public class MenuTui{
           }
           break;
         }
-        case "G":{
-         if (Task.getGeneral()) {
-           Gant gant = new Gant();
-           gant.printHead();
-           tasks.sort(new TaskByIdComparator());
-           for(Task task: tasks) {
-             gant.printTask(task);
-           }
-         }
+        case "g": {
+          if (Task.getGeneral()) {
+            Gant gant = new Gant();
+            gant.printHead();
+            tasks.sort(new TaskByIdComparator());
+            for (Task task : tasks) {
+              gant.printTask(task);
+            }
+          }
         }
-        case "Q": {
+        case "q": {
           return;
         }
       }
@@ -208,13 +209,13 @@ public class MenuTui{
     }
   }
 
-  public static void readTask(List<Task> tasks, int id) {
+  public static void readTask(List<Task> tasks, int id) throws IOException {
     for (Task task : tasks) {
       if (task.getID() == id) {
         System.out.println("Task ID: " + task.getID());
-        System.out.println("Title: ");
+        System.out.print("Title: ");
         System.out.println(task.getTitle());
-        System.out.printf("Author: %s%n ", task.getAuthor());
+        System.out.printf("Author: %s%n", task.getAuthor());
         System.out.printf("1 - Executor: %s%n", task.getExecutor());
         System.out.printf("2 - Start date: %s%n", task.getStartTime());
         System.out.printf("3 - Finish date: %s%n", task.getFinishTime());
@@ -235,6 +236,9 @@ public class MenuTui{
         System.out.printf("Status: %s%n", status);
         System.out.println();
         System.out.println("1-5 - EDIT Fields Q-EXIT");
+
+        editTask(tasks, id);
+
       }
     }
   }
@@ -285,12 +289,12 @@ public class MenuTui{
     if (diff.equalsIgnoreCase("High")) {
       difficult = true;
     }
-    System.out.print("S - SAVE Q-EXIT: ");
+    System.out.print("s - SAVE q-EXIT: ");
     while (true) {
       String command = br.readLine();
-      if (command.equalsIgnoreCase("Q")) {
+      if (command.equalsIgnoreCase("q")) {
         return;
-      } else if (command.equalsIgnoreCase("S")) {
+      } else if (command.equalsIgnoreCase("s")) {
         task.setID(id);
         task.setAuthor(Task.getUserName());
         task.setExecutor(executor);
@@ -353,10 +357,11 @@ public class MenuTui{
             prior = true;
           }
           tasks.get(id).setPriority(prior);
+          break;
         }
         case "5": {
           String difficult = "Low";
-          if (tasks.get(id).getPriority()) {
+          if (!tasks.get(id).getDifficult()) {
             difficult = "High";
           }
           System.out.printf("Difficult: %s%n", difficult);
@@ -367,8 +372,10 @@ public class MenuTui{
             diffic = true;
           }
           tasks.get(id).setDifficult(diffic);
+          break;
         }
-        case "Q": {
+        case "q": {
+          task.makeOutputFile(tasks);
           return;
         }
       }
