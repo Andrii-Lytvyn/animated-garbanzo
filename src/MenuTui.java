@@ -18,7 +18,7 @@ public class MenuTui {
   public static DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
   public static final String LINE = "------------------------------------------------------------------------------------------------------";
   public static final String HEADER = "| ID |  Author  | Executor |         Title           |   Start  |  Finish  |Priority|Difficult|Status|";
-  public static final String SHOW_ALL_MENU1 =        "|SORT BY: 1-Author 2-Executor 3-Title 4-Priority 5-Difficult 6-Status 7-StartDate 8-FinishDate 9-Id |";
+  public static final String SHOW_ALL_MENU1 = "|SORT BY: 1-Author 2-Executor 3-Title 4-Priority 5-Difficult 6-Status 7-StartDate 8-FinishDate 9-Id |";
   public static final String SHOW_ALL_MENU_GENERAL = "|COMMANDS: 1-8 SORT            | C-CHANGE USER | Q-QUIT | R-READ | A-ADD | D-DEL | F-FINISH | G-GUNT|";
   public static final String SHOW_ALL_MENU_USER = "|COMMANDS: 1-8 SORT                    | C-CHANGE USER | Q-QUIT | R-READ | A-ADD | D-DEL | F-FINISH |";
 
@@ -45,7 +45,7 @@ public class MenuTui {
 //  ChangeUser -- Andrii Golik
 //  Exit   -- Andrii Golik!!!
 
-  public static void mainMenu(List<Task> tasks) throws IOException {
+  public static void mainMenu(List<Task> tasks) throws IOException, ParseException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     while (true) {
       String key = br.readLine();
@@ -95,15 +95,25 @@ public class MenuTui {
           Collections.sort(tasks, comparator1);
           break;
         }
-        case "C":
+        case "C": {
+          changeUser(tasks);
           break;
+        }
         case "A":
+          addTask(tasks);
           break;
         case "D":
+          deleteTask(tasks);
           break;
         case "F":
+          finishTask(tasks);
           break;
         case "R":
+          System.out.print("Input task ID to READ:");
+          int id = Integer.parseInt(br.readLine());
+          if (checkIdInRange(tasks, id)) {
+            readTask(tasks, id);
+          }
           break;
         case "Q":
           return;
@@ -129,7 +139,7 @@ public class MenuTui {
     System.out.println(LINE);
   }
 
-  public void changeUser(List<Task> tasks) throws IOException {
+  public static void changeUser(List<Task> tasks) throws IOException {
     Task task = new Task();
     File usersFile = new File("src/rsc/Users.txt");
     File tasksFile = new File("src/rsc/Tasks.txt");
@@ -139,7 +149,7 @@ public class MenuTui {
 
   }
 
-  public void showAll(List<Task> tasks) {
+  public static void showAll(List<Task> tasks) {
     tasks.sort(new TaskByIdComparator());
 
     for (Task task : tasks) { //cut long Titles
@@ -157,7 +167,7 @@ public class MenuTui {
     }
   }
 
-  public void readTask(List<Task> tasks, int id) {
+  public static void readTask(List<Task> tasks, int id) {
     for (Task task : tasks) {
       if (task.getID() == id) {
         System.out.println("Task ID: " + task.getID());
@@ -188,7 +198,7 @@ public class MenuTui {
     }
   }
 
-  public void addTask(List<Task> tasks) throws IOException, ParseException {
+  public static void addTask(List<Task> tasks) throws IOException, ParseException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     Task task = new Task();
@@ -328,14 +338,28 @@ public class MenuTui {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     System.out.print("Input task ID to mark FINISHED:");
     int id = Integer.parseInt(br.readLine());
-    tasks.get(id).setStatus(true);
+    if (checkIdInRange(tasks, id)) {
+      tasks.get(id).setStatus(true);
+    }
   }
 
   public static void deleteTask(List<Task> tasks) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     System.out.print("Input task ID to DELETE:");
     int id = Integer.parseInt(br.readLine());
-    tasks.get(id).setDeleted(true);
+    if (checkIdInRange(tasks, id)) {
+      tasks.get(id).setDeleted(true);
+    }
+  }
+
+  public static boolean checkIdInRange(List<Task> tasks, int id) {
+    boolean result = false;
+    for (Task task : tasks) {
+      if (task.getID() == id) {
+        result = true;
+      }
+    }
+    return result;
   }
 }
 
