@@ -16,7 +16,7 @@ public class Task {
   private boolean status;
   private boolean deleted;
   public List<Task> tasks = new ArrayList<>();
-  public List<String> userNames = new ArrayList<>();
+  public static List<String> userNames = new ArrayList<>();
   private static boolean general = false;
   private static String userName;
 

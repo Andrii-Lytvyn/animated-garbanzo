@@ -78,7 +78,7 @@ public class Gant {
       complSign = color + "===" + colorReset;
     }
 
-    for (int k = 1; k <= 31; ++k) {
+    for (int k = 1; k <= 31; ++k) { // fill line with task sign
       line[k] = complSign;
     }
 

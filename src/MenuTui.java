@@ -1,21 +1,19 @@
-
-
-//line 64 - 76
-
-
-import com.sun.tools.javac.Main;
-
+import java.text.DateFormat;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.sql.SQLOutput;
-import java.text.Format;
+
 import java.util.List;
 
 public class MenuTui {
+  public static DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
   public static final String LINE = "------------------------------------------------------------------------------------------------------";
   public static final String HEADER = "| ID |  Author  | Executor |         Title           |   Start  |  Finish  |Priority|Difficult|Status|";
   public static final String SHOW_ALL_MENU1 = "|SORT BY: 1-Author 2-Executor 3-Title 4-Priority 5-Difficult 6-Status 7- Start date 8 - Finish date |";
@@ -54,19 +52,20 @@ public class MenuTui {
   public void showAllMenu() {
     System.out.println(LINE);
     System.out.println(SHOW_ALL_MENU1);
-    if(Task.getGeneral()){
+    if (Task.getGeneral()) {
       System.out.println(SHOW_ALL_MENU_GENERAL);
     } else {
       System.out.println(SHOW_ALL_MENU_USER);
     }
     System.out.println(LINE);
   }
+
   public void changeUser(List<Task> tasks) throws IOException {
     Task task = new Task();
     File usersFile = new File("src/rsc/Users.txt");
     File tasksFile = new File("src/rsc/Tasks.txt");
     task.makeOutputFile(tasks);
-    task.showLogin(usersFile,tasksFile);
+    task.showLogin(usersFile, tasksFile);
 
 
   }
@@ -92,13 +91,13 @@ public class MenuTui {
   public void readTask(List<Task> tasks, int id) {
     for (Task task : tasks) {
       if (task.getID() == id) {
-        System.out.println("1 - Task ID: " + task.getID());
+        System.out.println("Task ID: " + task.getID());
         System.out.println("Title: ");
         System.out.println(task.getTitle());
-        System.out.printf("2 - Author: %s%n ", task.getAuthor());
-        System.out.printf("3 - Executor: %s%n", task.getExecutor());
-        System.out.printf("4 - Start date: %s%n", task.getStartTime());
-        System.out.printf("5 - Finish date: %s%n", task.getFinishTime());
+        System.out.printf("Author: %s%n ", task.getAuthor());
+        System.out.printf("1 - Executor: %s%n", task.getExecutor());
+        System.out.printf("2 - Start date: %s%n", task.getStartTime());
+        System.out.printf("3 - Finish date: %s%n", task.getFinishTime());
         String priority = "Low";
         String difficult = "Low";
         String status = "Executing";
@@ -111,16 +110,16 @@ public class MenuTui {
         if (task.getStatus()) {
           status = "Finished";
         }
-        System.out.printf("6 - Priority: %s%n", priority);
-        System.out.printf("7 - Difficult: %s%n", difficult);
-        System.out.printf("8 - Status: %s%n", status);
+        System.out.printf("4 - Priority: %s%n", priority);
+        System.out.printf("5 - Difficult: %s%n", difficult);
+        System.out.printf("Status: %s%n", status);
         System.out.println();
-        System.out.println("1-8 - EDIT Fields Q-EXIT");
+        System.out.println("1-5 - EDIT Fields Q-EXIT");
       }
     }
   }
 
-  public void addTask(List<Task> tasks) throws IOException {
+  public void addTask(List<Task> tasks) throws IOException, ParseException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
     Task task = new Task();
@@ -140,11 +139,22 @@ public class MenuTui {
     if (Task.getGeneral()) {
       System.out.print("Input Executor: ");
       executor = br.readLine();
+      if (!Task.userNames.contains(executor)) {
+        executor = Task.getUserName();
+      }
     }
     System.out.print("Input Start date (dd.MM.yyyy): ");
     String startDate = br.readLine();
-    System.out.print("Input Finish date (dd.MM.yyyy): ");
-    String finishDate = br.readLine();
+    Date stDate = formatter.parse(startDate);
+    String finishDate;
+    Date finDate;
+    do {
+      System.out.print("Input Finish date (dd.MM.yyyy): ");
+      finishDate = br.readLine();
+      finDate = formatter.parse(startDate);
+    }
+    while (stDate.before(finDate));
+
     System.out.print("Input Priority (Low/High): ");
     String prior = br.readLine();
     if (prior.equalsIgnoreCase("High")) {
@@ -155,18 +165,15 @@ public class MenuTui {
     if (diff.equalsIgnoreCase("High")) {
       difficult = true;
     }
-    boolean cycle = true;
     System.out.print("S - SAVE Q-EXIT: ");
-    while (cycle) {
+    while (true) {
       String command = br.readLine();
-      if(command.equalsIgnoreCase("Q")) {
+      if (command.equalsIgnoreCase("Q")) {
         return;
       } else if (command.equalsIgnoreCase("S")) {
         task.setID(id);
         task.setAuthor(Task.getUserName());
-
         task.setExecutor(executor);
-
         task.setTitle(title);
         task.setStartTime(startDate);
         task.setFinishTime(finishDate);
@@ -178,8 +185,74 @@ public class MenuTui {
         return;
       }
     }
-
-
   }
 
+  public static void editTask(List<Task> tasks, int id) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    while (true) {
+      String key = br.readLine();
+      switch (key) {
+        case "1": {
+          if (Task.getGeneral()) {
+            System.out.printf("Executor: %s%n", tasks.get(id).getExecutor());
+            System.out.print("Input new Executor: ");
+            String executor = br.readLine();
+            if (!Task.userNames.contains(executor)) {
+              executor = Task.getUserName();
+            }
+            tasks.get(id).setExecutor(executor);
+          } else {
+            System.out.println("You are not allowed to change Executor");
+          }
+          break;
+        }
+        case "2": {
+          System.out.printf("Start date: %s%n", tasks.get(id).getStartTime());
+          System.out.print("input new Start date: ");
+          String newStartDate = br.readLine();
+          tasks.get(id).setStartTime(newStartDate);
+          break;
+        }
+        case "3": {
+          System.out.printf("Finish date: %s%n", tasks.get(id).getFinishTime());
+          System.out.print("input new Finish date: ");
+          String newFinishDate = br.readLine();
+          tasks.get(id).setFinishTime(newFinishDate);
+          break;
+        }
+        case "4": {
+          String priority = "Low";
+          if (tasks.get(id).getPriority()) {
+            priority = "High";
+          }
+          System.out.printf("Priority: %s%n", priority);
+          System.out.print("Input new Priority (High/Low): ");
+          String newPriority = br.readLine();
+          boolean prior = false;
+          if (newPriority.equalsIgnoreCase("High")) {
+            prior = true;
+          }
+          tasks.get(id).setPriority(prior);
+        }
+        case "5": {
+          String difficult = "Low";
+          if (tasks.get(id).getPriority()) {
+            difficult = "High";
+          }
+          System.out.printf("Difficult: %s%n", difficult);
+          System.out.print("Input new Difficult (High/Low): ");
+          String newDifficult = br.readLine();
+          boolean diffic = false;
+          if (newDifficult.equalsIgnoreCase("High")) {
+            diffic = true;
+          }
+          tasks.get(id).setDifficult(diffic);
+        }
+        case "Q": {
+          return;
+        }
+      }
+    }
+  }
 }
+
