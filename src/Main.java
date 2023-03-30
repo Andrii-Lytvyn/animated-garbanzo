@@ -19,14 +19,12 @@ public class Main {
       menu.printHeader();
       menu.showAll(task.tasks);
       menu.showAllMenu();
-      menu.mainMenu(task.tasks);
+
 
     } catch (FileNotFoundException e) {
       System.err.println("File not found: " + e.getMessage());
     } catch (IOException e) {
       System.err.println("Input/output exception: " + e.getMessage());
-    } catch (ParseException e) {
-      throw new RuntimeException(e);
     }
   }
 }

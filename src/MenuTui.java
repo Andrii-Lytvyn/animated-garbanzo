@@ -415,7 +415,7 @@ public class MenuTui {
     menu.printHeader();
     menu.showAll(task.tasks);
     menu.showAllMenu();
-    menu.mainMenu(task.tasks);
+    //menu.mainMenu(task.tasks);
 
   }
 }
