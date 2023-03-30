@@ -14,7 +14,7 @@ import java.io.InputStreamReader;
 
 import java.util.List;
 
-public class MenuTui {
+public class MenuTui{
   public static DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
   public static final String LINE = "------------------------------------------------------------------------------------------------------";
   public static final String HEADER = "| ID |  Author  | Executor |         Title           |   Start  |  Finish  |Priority|Difficult|Status|";
@@ -45,79 +45,93 @@ public class MenuTui {
 //  ChangeUser -- Andrii Golik
 //  Exit   -- Andrii Golik!!!
 
-  public static void mainMenu(List<Task> tasks) throws IOException, ParseException {
+  public void mainMenu(List<Task> tasks) throws IOException, ParseException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     while (true) {
       String key = br.readLine();
       switch (key) {
         case "1": {
           Comparator<Task> comparator = new TaskByAutorComparator();
-          Collections.sort(tasks, comparator);
+          tasks.sort(comparator);
           break;
         }
         case "2": {
           Comparator<Task> comparator = new TaskByExecutorComparator();
-          Collections.sort(tasks, comparator);
+          tasks.sort(comparator);
           break;
         }
         case "3": {
           Comparator<Task> comparator = new TaskByTitleComparator();
-          Collections.sort(tasks, comparator);
+          tasks.sort(comparator);
           break;
         }
         case "4": {
           Comparator<Task> comparator = new TaskByPriorityComparator();
-          Collections.sort(tasks, comparator);
+          tasks.sort(comparator);
           break;
         }
         case "5": {
           Comparator<Task> comparator = new TaskByDifficultComparator();
-          Collections.sort(tasks, comparator);
+          tasks.sort(comparator);
           break;
         }
         case "6": {
           Comparator<Task> comparator = new TaskByStatusComparator();
-          Collections.sort(tasks, comparator);
+          tasks.sort(comparator);
           break;
         }
         case "7": {
           Comparator<Task> comparator = new TaskByStartDateComparator();
-          Collections.sort(tasks, comparator);
+          tasks.sort(comparator);
           break;
         }
         case "8": {
           Comparator<Task> comparator = new TaskByFinishDateComparator();
-          Collections.sort(tasks, comparator);
+          tasks.sort(comparator);
           break;
         }
         case "9": {
           Comparator<Task> comparator1 = new TaskByIdComparator();
-          Collections.sort(tasks, comparator1);
+          tasks.sort(comparator1);
           break;
         }
         case "C": {
           changeUser(tasks);
           break;
         }
-        case "A":
+        case "A": {
           addTask(tasks);
           break;
-        case "D":
+        }
+        case "D": {
           deleteTask(tasks);
           break;
-        case "F":
+        }
+        case "F": {
           finishTask(tasks);
           break;
-        case "R":
+        }
+        case "R": {
           System.out.print("Input task ID to READ:");
           int id = Integer.parseInt(br.readLine());
           if (checkIdInRange(tasks, id)) {
             readTask(tasks, id);
           }
           break;
-        case "Q":
+        }
+        case "G":{
+         if (Task.getGeneral()) {
+           Gant gant = new Gant();
+           gant.printHead();
+           tasks.sort(new TaskByIdComparator());
+           for(Task task: tasks) {
+             gant.printTask(task);
+           }
+         }
+        }
+        case "Q": {
           return;
-
+        }
       }
     }
   }

@@ -3,6 +3,7 @@
 public class Gant {
   private int dataStart; //число месяца
   private int dataStop;
+  public final String SEP = ".";
 
   public int getDataStart() {
     return dataStart;
@@ -20,9 +21,9 @@ public class Gant {
     this.dataStop = dataStop;
   }
 
-  public Gant(int start, int finish) {
-    this.dataStart = start;
-    this.dataStop = finish;
+  public Gant() {
+    this.dataStart = 1;
+    this.dataStop = 31;
   }
 
   public void printHead() {
@@ -54,6 +55,14 @@ public class Gant {
     String color = "\u001B[46m";
     String colorReset = "\u001B[0m";
 
+    String startDate = task.getStartTime();
+    int indexStart = startDate.indexOf(SEP);
+    int start = Integer.parseInt(startDate.substring(0, indexStart));
+
+    String finishDate = task.getFinishTime();
+    int indexFinish = finishDate.indexOf(SEP);
+    int finish = Integer.parseInt(finishDate.substring(0, indexFinish));
+
     String[] line = new String[32]; // 32 cells in one row
     for (int i = 1; i < line.length; ++i) {
       line[i] = "   ";
@@ -71,14 +80,14 @@ public class Gant {
     }
     line[0] = String.format("|%25s|", title);
 
-    complSign = color +complSign + colorReset;
+    complSign = color + complSign + colorReset;
     if (task.getDifficult() == false) {
       complSign = color + "---" + colorReset;
     } else {
       complSign = color + "===" + colorReset;
     }
 
-    for (int k = 1; k <= 31; ++k) { // fill line with task sign
+    for (int k = start; k <= finish; ++k) { // fill line with task sign
       line[k] = complSign;
     }
 
@@ -88,7 +97,7 @@ public class Gant {
     System.out.println("\u001B[0m");
   }
 
-  public void gantMenu(){
+  public void gantMenu() {
     System.out.println("S - SHOW ALL TASKS,    Q - QUIT");
   }
 }
