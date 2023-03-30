@@ -1,14 +1,8 @@
-//package src;
-
 import java.io.*;
 import java.util.*;
 
-//TODO Andrey Litvin
-//fields ...
-// line 43 - 60
 public class Task {
   final public static String SEP = ",";
-
   private int ID;
   private String author;
   private String executor;
@@ -19,9 +13,7 @@ public class Task {
   private boolean difficult;
   private boolean status;
   private boolean deleted;
-
   public List<Task> tasks = new ArrayList<>();
-
   private static boolean general = false;
   private static String userName;
 
@@ -41,9 +33,7 @@ public class Task {
   }
 
   public Task() {
-
   }
-
 
   public void setID(int ID) {
     this.ID = ID;
@@ -157,12 +147,10 @@ public class Task {
         ' ';
   }
 
-  //TODO не верный пользователь стоп или цикл
-  public void showLogin(File usersFile) throws IOException {
+  public void showLogin(File usersFile, File tasksFile) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     BufferedReader inputFileReader = new BufferedReader(new FileReader(usersFile));
     Map<String, String> users = new HashMap<>();
-
     for (String row = inputFileReader.readLine(); row != null; row = inputFileReader.readLine()) {
       String[] temp = row.split(SEP);
       users.put(temp[0], temp[1]);
@@ -175,20 +163,19 @@ public class Task {
       if (users.get(login).equals(password)) {
         System.out.println("Passed");
         setUserName(login);
+        parseTaskFromFile(tasksFile);
         if (login.equals("general")) {
           setGeneral(true);
         }
-
       } else {
-        System.err.println("Incorrect login or password");
+        System.err.print("Incorrect password.");
         System.exit(1);
       }
     } catch (NullPointerException e) {
-      System.err.println("User is not detected: " + e.getMessage());
+      System.err.print("User is not detected.");
       System.exit(1);
     }
-    //TODO добавить что не верно. Добавить тест
-    //TODO Исключение одинаковых пользователей
+    //TODO перед изменением пользователя записать файл
   }
 
   public void parseTaskFromFile(File tasksFile) throws IOException {
@@ -196,7 +183,6 @@ public class Task {
     for (String row = inputFileReader.readLine(); row != null; row = inputFileReader.readLine()) {
       String[] temp = row.split(SEP);
       Task task = new Task();
-
       task.setID(Integer.parseInt(temp[0]));
       task.setAuthor(temp[1]);
       task.setExecutor(temp[2]);
@@ -226,7 +212,6 @@ public class Task {
     return ID + "," + author + "," + executor + "," + title + "," + startTime + "," + finishTime + "," +
         priority + "," + difficult + "," + status + "," + deleted + "\n";
   }
-
 
   public void makeOutputFile(List<Task> tasks) throws IOException {
     try {

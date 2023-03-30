@@ -61,11 +61,13 @@ public class MenuTui {
     }
     System.out.println(LINE);
   }
-  public void changeUser() throws IOException {
+  public void changeUser(List<Task> tasks) throws IOException {
     Task task = new Task();
     File usersFile = new File("src/rsc/Users.txt");
+    File tasksFile = new File("src/rsc/Tasks.txt");
+    task.makeOutputFile(tasks);
+    task.showLogin(usersFile,tasksFile);
 
-    task.showLogin(usersFile);
 
   }
 

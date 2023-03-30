@@ -12,16 +12,13 @@ public class Main {
       Task task = new Task();
       File tasksFile = new File("src/rsc/Tasks.txt");
       File usersFile = new File("src/rsc/Users.txt");
-
-      task.showLogin(usersFile);
-
-
-      task.parseTaskFromFile(tasksFile);
+      task.showLogin(usersFile,tasksFile);
+     // task.parseTaskFromFile(tasksFile);
       MenuTui menu = new MenuTui();
       menu.printHeader();
       menu.showAll(task.tasks);
       menu.showAllMenu();
-      menu.changeUser();
+      menu.changeUser(task.tasks);
 
       menu.addTask(task.tasks);
       task.makeOutputFile(task.tasks);
