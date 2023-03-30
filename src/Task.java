@@ -1,3 +1,5 @@
+//package src;
+
 import java.io.*;
 import java.util.*;
 
@@ -14,6 +16,7 @@ public class Task {
   private boolean status;
   private boolean deleted;
   public List<Task> tasks = new ArrayList<>();
+  public List<String> userNames = new ArrayList<>();
   private static boolean general = false;
   private static String userName;
 
@@ -154,6 +157,7 @@ public class Task {
     for (String row = inputFileReader.readLine(); row != null; row = inputFileReader.readLine()) {
       String[] temp = row.split(SEP);
       users.put(temp[0], temp[1]);
+      userNames.add(temp[0]);
     }
     System.out.print("Login: ");
     String login = br.readLine();
@@ -212,6 +216,7 @@ public class Task {
     return ID + "," + author + "," + executor + "," + title + "," + startTime + "," + finishTime + "," +
         priority + "," + difficult + "," + status + "," + deleted + "\n";
   }
+
 
   public void makeOutputFile(List<Task> tasks) throws IOException {
     try {
