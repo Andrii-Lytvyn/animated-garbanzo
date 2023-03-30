@@ -313,65 +313,86 @@ public class MenuTui {
 
   public static void editTask(List<Task> tasks, int id) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    Task taskTemp;
     while (true) {
       String key = br.readLine();
       switch (key) {
         case "1": {
-          if (Task.getGeneral()) {
-            System.out.printf("Executor: %s%n", tasks.get(id).getExecutor());
-            System.out.print("Input new Executor: ");
-            String executor = br.readLine();
-            if (!Task.userNames.contains(executor)) {
-              executor = Task.getUserName();
+          for (Task task : tasks) {
+            if (task.getID() == id) {
+              if (Task.getGeneral()) {
+                System.out.printf("Executor: %s%n", task.getExecutor());
+                System.out.print("Input new Executor: ");
+                String executor = br.readLine();
+                if (!Task.userNames.contains(executor)) {
+                  executor = Task.getUserName();
+                }
+                task.setExecutor(executor);
+              } else {
+                System.out.println("You are not allowed to change Executor");
+              }
             }
-            tasks.get(id).setExecutor(executor);
-          } else {
-            System.out.println("You are not allowed to change Executor");
           }
-          break;
         }
         case "2": {
-          System.out.printf("Start date: %s%n", tasks.get(id).getStartTime());
-          System.out.print("input new Start date: ");
-          String newStartDate = br.readLine();
-          tasks.get(id).setStartTime(newStartDate);
+          for (Task task : tasks) {
+            if (task.getID() == id) {
+              System.out.printf("Start date: %s%n", task.getStartTime());
+              System.out.print("input new Start date: ");
+              String newStartDate = br.readLine();
+              task.setStartTime(newStartDate);
+            }
+          }
           break;
         }
         case "3": {
-          System.out.printf("Finish date: %s%n", tasks.get(id).getFinishTime());
-          System.out.print("input new Finish date: ");
-          String newFinishDate = br.readLine();
-          tasks.get(id).setFinishTime(newFinishDate);
+          for (Task task : tasks) {
+            if (task.getID() == id) {
+              System.out.printf("Finish date: %s%n", task.getFinishTime());
+              System.out.print("input new Finish date: ");
+              String newFinishDate = br.readLine();
+              task.setFinishTime(newFinishDate);
+              System.out.println("id: " + id);
+            }
+          }
           break;
         }
         case "4": {
-          String priority = "Low";
-          if (tasks.get(id).getPriority()) {
-            priority = "High";
+          for (Task task : tasks) {
+            if (task.getID() == id) {
+              String priority = "Low";
+              if (task.getPriority()) {
+                priority = "High";
+              }
+              System.out.printf("Priority: %s%n", priority);
+              System.out.print("Input new Priority (High/Low): ");
+              String newPriority = br.readLine();
+              boolean prior = false;
+              if (newPriority.equalsIgnoreCase("High")) {
+                prior = true;
+              }
+              task.setPriority(prior);
+            }
           }
-          System.out.printf("Priority: %s%n", priority);
-          System.out.print("Input new Priority (High/Low): ");
-          String newPriority = br.readLine();
-          boolean prior = false;
-          if (newPriority.equalsIgnoreCase("High")) {
-            prior = true;
-          }
-          tasks.get(id).setPriority(prior);
           break;
         }
         case "5": {
-          String difficult = "Low";
-          if (!tasks.get(id).getDifficult()) {
-            difficult = "High";
+          for (Task task : tasks) {
+            if (task.getID() == id) {
+              String difficult = "Low";
+              if (!task.getDifficult()) {
+                difficult = "High";
+              }
+              System.out.printf("Difficult: %s%n", difficult);
+              System.out.print("Input new Difficult (High/Low): ");
+              String newDifficult = br.readLine();
+              boolean diffic = false;
+              if (newDifficult.equalsIgnoreCase("High")) {
+                diffic = true;
+              }
+              task.setDifficult(diffic);
+            }
           }
-          System.out.printf("Difficult: %s%n", difficult);
-          System.out.print("Input new Difficult (High/Low): ");
-          String newDifficult = br.readLine();
-          boolean diffic = false;
-          if (newDifficult.equalsIgnoreCase("High")) {
-            diffic = true;
-          }
-          tasks.get(id).setDifficult(diffic);
           break;
         }
         case "q": {
@@ -387,7 +408,11 @@ public class MenuTui {
     System.out.print("Input task ID to mark FINISHED:");
     int id = Integer.parseInt(br.readLine());
     if (checkIdInRange(tasks, id)) {
-      tasks.get(id).setStatus(true);
+      for (Task task : tasks) {
+        if (task.getID() == id) {
+          task.setStatus(true);
+        }
+      }
     }
   }
 
@@ -396,7 +421,11 @@ public class MenuTui {
     System.out.print("Input task ID to DELETE:");
     int id = Integer.parseInt(br.readLine());
     if (checkIdInRange(tasks, id)) {
-      tasks.get(id).setDeleted(true);
+      for (Task task : tasks) {
+        if (task.getID() == id) {
+          task.setDeleted(true);
+        }
+      }
     }
   }
 
