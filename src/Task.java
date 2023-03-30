@@ -1,7 +1,9 @@
 //package src;
 
+import java.awt.*;
 import java.io.*;
 import java.util.*;
+import java.util.List;
 
 public class Task {
   final public static String SEP = ",";
@@ -34,6 +36,8 @@ public class Task {
     this.status = status;
     this.deleted = deleted;
   }
+
+  MenuTui menu = new MenuTui();
 
   public Task() {
   }
@@ -165,6 +169,7 @@ public class Task {
     String password = br.readLine();
     try {
       if (users.get(login).equals(password)) {
+        menu.clearAll();
         System.out.println("Passed");
         setUserName(login);
         parseTaskFromFile(tasksFile);
@@ -172,12 +177,18 @@ public class Task {
           setGeneral(true);
         }
       } else {
-        System.err.print("Incorrect password.");
-        System.exit(1);
+        System.err.println("Incorrect password.");
+        System.out.println();
+        showLogin(usersFile, tasksFile);
+        //System.exit(1);
       }
     } catch (NullPointerException e) {
-      System.err.print("User is not detected.");
-      System.exit(1);
+      System.err.println("User is not detected.");
+      System.out.println();
+      //System.exit(1);
+      showLogin(usersFile, tasksFile);
+    } catch (AWTException e) {
+      throw new RuntimeException(e);
     }
     //TODO перед изменением пользователя записать файл
   }
