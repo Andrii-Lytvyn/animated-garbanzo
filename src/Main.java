@@ -3,6 +3,7 @@
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.io.IOException;
+import java.text.ParseException;
 
 public class Main {
 
@@ -27,6 +28,8 @@ public class Main {
       System.err.println("File not found: " + e.getMessage());
     } catch (IOException e) {
       System.err.println("Input/output exception: " + e.getMessage());
+    } catch (ParseException e) {
+      throw new RuntimeException(e);
     }
   }
 }

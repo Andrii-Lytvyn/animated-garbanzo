@@ -2,6 +2,8 @@ import java.text.DateFormat;
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.Date;
 import java.awt.*;
 import java.awt.event.KeyEvent;
@@ -16,7 +18,7 @@ public class MenuTui {
   public static DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
   public static final String LINE = "------------------------------------------------------------------------------------------------------";
   public static final String HEADER = "| ID |  Author  | Executor |         Title           |   Start  |  Finish  |Priority|Difficult|Status|";
-  public static final String SHOW_ALL_MENU1 = "|SORT BY: 1-Author 2-Executor 3-Title 4-Priority 5-Difficult 6-Status 7- Start date 8 - Finish date |";
+  public static final String SHOW_ALL_MENU1 =        "|SORT BY: 1-Author 2-Executor 3-Title 4-Priority 5-Difficult 6-Status 7-StartDate 8-FinishDate 9-Id |";
   public static final String SHOW_ALL_MENU_GENERAL = "|COMMANDS: 1-8 SORT            | C-CHANGE USER | Q-QUIT | R-READ | A-ADD | D-DEL | F-FINISH | G-GUNT|";
   public static final String SHOW_ALL_MENU_USER = "|COMMANDS: 1-8 SORT                    | C-CHANGE USER | Q-QUIT | R-READ | A-ADD | D-DEL | F-FINISH |";
 
@@ -42,6 +44,73 @@ public class MenuTui {
 //  Delete -- Sasha
 //  ChangeUser -- Andrii Golik
 //  Exit   -- Andrii Golik!!!
+
+  public static void mainMenu(List<Task> tasks) throws IOException {
+    BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+    while (true) {
+      String key = br.readLine();
+      switch (key) {
+        case "1": {
+          Comparator<Task> comparator = new TaskByAutorComparator();
+          Collections.sort(tasks, comparator);
+          break;
+        }
+        case "2": {
+          Comparator<Task> comparator = new TaskByExecutorComparator();
+          Collections.sort(tasks, comparator);
+          break;
+        }
+        case "3": {
+          Comparator<Task> comparator = new TaskByTitleComparator();
+          Collections.sort(tasks, comparator);
+          break;
+        }
+        case "4": {
+          Comparator<Task> comparator = new TaskByPriorityComparator();
+          Collections.sort(tasks, comparator);
+          break;
+        }
+        case "5": {
+          Comparator<Task> comparator = new TaskByDifficultComparator();
+          Collections.sort(tasks, comparator);
+          break;
+        }
+        case "6": {
+          Comparator<Task> comparator = new TaskByStatusComparator();
+          Collections.sort(tasks, comparator);
+          break;
+        }
+        case "7": {
+          Comparator<Task> comparator = new TaskByStartDateComparator();
+          Collections.sort(tasks, comparator);
+          break;
+        }
+        case "8": {
+          Comparator<Task> comparator = new TaskByFinishDateComparator();
+          Collections.sort(tasks, comparator);
+          break;
+        }
+        case "9": {
+          Comparator<Task> comparator1 = new TaskByIdComparator();
+          Collections.sort(tasks, comparator1);
+          break;
+        }
+        case "C":
+          break;
+        case "A":
+          break;
+        case "D":
+          break;
+        case "F":
+          break;
+        case "R":
+          break;
+        case "Q":
+          return;
+
+      }
+    }
+  }
 
   public void printHeader() {
     System.out.println(LINE);
