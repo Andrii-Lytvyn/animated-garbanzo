@@ -68,7 +68,7 @@ public class MenuTui {
   public void taskMenu(List<Task> tasks) throws IOException, ParseException, AWTException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     while (true) {
-      System.out.print("Choose command: ");
+      System.out.print(ConsoleColors.WHITE_BOLD_BRIGHT + "Choose command: " + ConsoleColors.RESET);
       String key = br.readLine();
       switch (key) {
         case "1": {
@@ -146,6 +146,7 @@ public class MenuTui {
           break;
         }
         case "r": {
+          System.out.println();
           System.out.print("Input task ID to READ:");
           int id = Integer.parseInt(br.readLine());
           if (checkIdInRange(tasks, id)) {
@@ -175,7 +176,9 @@ public class MenuTui {
           refresh(tasks);
         }
         case "q": {
-          return;
+          task.makeOutputFile(tasks);
+          System.exit(0);
+
         }
       }
     }
@@ -214,8 +217,8 @@ public class MenuTui {
 //    tasks.sort(new TaskByIdComparator());
     for (Task task : tasks) { //cut long Titles
       String title = task.getTitle();
-      if (title.length() > 25) {
-        title = title.substring(0, 22) + "...";
+      if (title.length() > 33) {
+        title = title.substring(0, 29) + "...";
       }
       if (task.getDeleted()) {
         continue;
