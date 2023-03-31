@@ -156,7 +156,7 @@ public class MenuTui {
           break;
         }
         case "g": {
-          refresh(tasks);
+//          refresh(tasks);
           if (Task.getGeneral()) {
             Gant gant = new Gant();
             gant.printHead();
