@@ -1,5 +1,5 @@
 1,general,general,Arrange tasks for team,01.03.2023,02.03.2023,true,false,false,false
-3,general,general,Find money for workers :),01.03.2023,15.03.2023,true,false,false,false
+3,general,general,Find money for workers :),q,15.03.2023,true,false,false,false
 12,general,general,Control progress,16.03.2023,29.03.2023,true,false,false,false
 13,general,general,Check result,30.03.2023,31.03.2023,true,false,false,false
 8,general,user1,Write readFile(),02.03.2023,07.03.2023,true,true,false,false

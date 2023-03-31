@@ -147,7 +147,7 @@ public class MenuTui {
         }
         case "r": {
           System.out.println();
-          System.out.print("Input task ID to READ:");
+          System.out.print(ConsoleColors.BLUE_BOLD + "Input task ID to READ: " + ConsoleColors.RESET);
           int id = Integer.parseInt(br.readLine());
           if (checkIdInRange(tasks, id)) {
             readTask(tasks, id);
@@ -253,13 +253,13 @@ public class MenuTui {
   public static void readTask(List<Task> tasks, int id) throws IOException {
     for (Task task : tasks) {
       if (task.getID() == id) {
-        System.out.println("Task ID: " + task.getID());
-        System.out.print("Title: ");
-        System.out.println(task.getTitle());
-        System.out.printf("Author: %s%n", task.getAuthor());
-        System.out.printf("1 - Executor: %s%n", task.getExecutor());
-        System.out.printf("2 - Start date: %s%n", task.getStartTime());
-        System.out.printf("3 - Finish date: %s%n", task.getFinishTime());
+        System.out.println(ConsoleColors.BLUE + "Task ID:            "+ ConsoleColors.RESET + ConsoleColors.YELLOW+task.getID()+ ConsoleColors.RESET);
+        System.out.print(ConsoleColors.BLUE + "Title:              ");
+        System.out.println(ConsoleColors.RESET + ConsoleColors.YELLOW+task.getTitle());
+        System.out.printf(ConsoleColors.BLUE + "Author:             %s%n", ConsoleColors.RESET + ConsoleColors.YELLOW+task.getAuthor()+ ConsoleColors.RESET);
+        System.out.printf(ConsoleColors.BLUE + "1 - Executor:       %s%n", ConsoleColors.RESET + ConsoleColors.YELLOW+task.getExecutor()+ ConsoleColors.RESET);
+        System.out.printf(ConsoleColors.BLUE + "2 - Start date:     %s%n", ConsoleColors.RESET + ConsoleColors.YELLOW+task.getStartTime()+ ConsoleColors.RESET);
+        System.out.printf(ConsoleColors.BLUE + "3 - Finish date:    %s%n", ConsoleColors.RESET + ConsoleColors.YELLOW+task.getFinishTime()+ ConsoleColors.RESET);
         String priority = "Low";
         String difficult = "Low";
         String status = "Executing";
@@ -272,11 +272,12 @@ public class MenuTui {
         if (task.getStatus()) {
           status = "Finished";
         }
-        System.out.printf("4 - Priority: %s%n", priority);
-        System.out.printf("5 - Difficult: %s%n", difficult);
-        System.out.printf("Status: %s%n", status);
+        System.out.printf(ConsoleColors.BLUE + "4 - Priority:       %s%n", ConsoleColors.RESET + ConsoleColors.YELLOW+priority+ ConsoleColors.RESET);
+        System.out.printf(ConsoleColors.BLUE + "5 - Difficult:      %s%n", ConsoleColors.RESET + ConsoleColors.YELLOW+difficult+ ConsoleColors.RESET);
+        System.out.printf(ConsoleColors.BLUE + "Status:             %s%n", ConsoleColors.RESET + ConsoleColors.YELLOW+status+ ConsoleColors.RESET);
         System.out.println();
-        System.out.println("1-5 - EDIT Fields Q-EXIT");
+        System.out.println(ConsoleColors.WHITE_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD + " 1-5 - EDIT Fields "+ ConsoleColors.RESET + " "
+                + ConsoleColors.WHITE_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD + " Q-EXIT " +ConsoleColors.RESET);
 
         editTask(tasks, id);
 
@@ -296,41 +297,42 @@ public class MenuTui {
 
     System.out.println();
     int id = task.getNewTaskId(tasks);
-    System.out.println("Task ID: " + id);
-    System.out.printf("Author: %s%n", Task.getUserName()); //
-    System.out.print("Input title: ");
+    System.out.println(ConsoleColors.BLUE +"Task ID:         " + id);
+    System.out.printf(ConsoleColors.BLUE +"Author:          %s%n", Task.getUserName()); //
+    System.out.print(ConsoleColors.BLUE + "Input title:     ");
     String title = br.readLine();
 
     if (Task.getGeneral()) {
-      System.out.print("Input Executor: ");
+      System.out.print(ConsoleColors.BLUE +"Input Executor:");
       executor = br.readLine();
       if (!Task.userNames.contains(executor)) {
         executor = Task.getUserName();
       }
     }
-    System.out.print("Input Start date (dd.MM.yyyy): ");
+    System.out.print(ConsoleColors.BLUE +"Input Start date (dd.MM.yyyy):  ");
     String startDate = br.readLine();
     Date stDate = formatter.parse(startDate);
     String finishDate;
     Date finDate;
     do {
-      System.out.print("Input Finish date (dd.MM.yyyy): ");
+      System.out.print(ConsoleColors.BLUE +"Input Finish date (dd.MM.yyyy): ");
       finishDate = br.readLine();
       finDate = formatter.parse(startDate);
     }
     while (stDate.before(finDate));
 
-    System.out.print("Input Priority (Low/High): ");
+    System.out.print("Input Priority (Low/High):      ");
     String prior = br.readLine();
     if (prior.equalsIgnoreCase("High")) {
       priority = true;
     }
-    System.out.print("Input Difficult (Low/High): ");
+    System.out.print("Input Difficult (Low/High):     ");
     String diff = br.readLine();
     if (diff.equalsIgnoreCase("High")) {
       difficult = true;
     }
-    System.out.print("s - SAVE q-EXIT: ");
+    System.out.println();
+    System.out.print(ConsoleColors.WHITE_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD + " s - SAVE " + ConsoleColors.RESET + " " + ConsoleColors.WHITE_BACKGROUND_BRIGHT + ConsoleColors.BLACK_BOLD + " q-EXIT: " + ConsoleColors.RESET);
     while (true) {
       String command = br.readLine();
       if (command.equalsIgnoreCase("q")) {
@@ -447,7 +449,8 @@ public class MenuTui {
 
   public static void finishTask(List<Task> tasks) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    System.out.print("Input task ID to mark FINISHED:");
+    System.out.println();
+    System.out.print(ConsoleColors.BLUE+ "Input task ID to mark FINISHED: " + ConsoleColors.RESET);
     int id = Integer.parseInt(br.readLine());
     if (checkIdInRange(tasks, id)) {
       for (Task task : tasks) {
@@ -460,7 +463,8 @@ public class MenuTui {
 
   public static void deleteTask(List<Task> tasks) throws IOException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-    System.out.print("Input task ID to DELETE:");
+    System.out.println();
+    System.out.print(ConsoleColors.BLUE_BOLD + "Input task ID to DELETE: " + ConsoleColors.RESET);
     int id = Integer.parseInt(br.readLine());
     if (checkIdInRange(tasks, id)) {
       for (Task task : tasks) {
