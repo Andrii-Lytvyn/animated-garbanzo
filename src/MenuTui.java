@@ -14,11 +14,34 @@ import java.util.List;
 
 public class MenuTui {
   public static DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
-  public static final String LINE = "------------------------------------------------------------------------------------------------------";
-  public static final String HEADER = "| ID |  Author  | Executor |         Title           |   Start  |  Finish  |Priority|Difficult|Status|";
-  public static final String SHOW_ALL_MENU1 = "|SORT BY: 1-Author 2-Executor 3-Title 4-Priority 5-Difficult 6-Status 7-StartDate 8-FinishDate 9-Id |";
-  public static final String SHOW_ALL_MENU_GENERAL = "|COMMANDS: 1-8 SORT            | C-CHANGE USER | Q-QUIT | R-READ | A-ADD | D-DEL | F-FINISH | G-GUNT|";
-  public static final String SHOW_ALL_MENU_USER = "|COMMANDS: 1-8 SORT                    | C-CHANGE USER | Q-QUIT | R-READ | A-ADD | D-DEL | F-FINISH |";
+public static final String LINE =     "=============================================================================================================================";
+  public static final String HEADER = "| ID |  Author  | Executor |              Title                |   Start   |  Finish   |  Priority  |  Difficult  |  Status |";
+  public static final String SHOW_ALL_MENU1 = ""
+          + ConsoleColors.YELLOW + "|SORT BY:         " + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " 1-Author " + ConsoleColors.RESET + " "
+          + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " 2-Executor " + ConsoleColors.RESET+ " "
+          + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " 3-Title " + ConsoleColors.RESET+ " "
+          + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " 4-Priority " + ConsoleColors.RESET+ " "
+          + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " 5-Difficult " + ConsoleColors.RESET+ " "
+          + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " 6-Status " + ConsoleColors.RESET+ " "
+          + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " 7-StartDate " + ConsoleColors.RESET+ " "
+          + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " 8-FinishDate " + ConsoleColors.RESET+ " "
+          + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " 9-Id " + ConsoleColors.RESET+ " " ;
+  public static final String SHOW_ALL_MENU_GENERAL = ConsoleColors.BLUE + "|COMMANDS:        "
+          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " C-CHANGE USER " + ConsoleColors.RESET+ " "
+          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " R-READ " + ConsoleColors.RESET+ " "
+          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " A-ADD " + ConsoleColors.RESET+ " "
+          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " D-DEL " + ConsoleColors.RESET+ " "
+          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " F-FINISH " + ConsoleColors.RESET+ " "
+          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " G-GUNT " + ConsoleColors.RESET+ " "
+          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " Q-QUIT " + ConsoleColors.RESET+ " ";
+  public static final String SHOW_ALL_MENU_USER = ConsoleColors.BLUE + "|COMMANDS:        "
+          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " C-CHANGE USER " + ConsoleColors.RESET+ " "
+          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " R-READ " + ConsoleColors.RESET+ " "
+          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " A-ADD " + ConsoleColors.RESET+ " "
+          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " D-DEL " + ConsoleColors.RESET+ " "
+          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " F-FINISH " + ConsoleColors.RESET+ " "
+          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " Q-QUIT " + ConsoleColors.RESET+ " ";
+
   public static Task task = new Task();
 
   public void clearAll() throws AWTException {
@@ -165,20 +188,21 @@ public class MenuTui {
   }
 
   public static void printHeader() {
-    System.out.println(LINE);
-    System.out.println(HEADER);
-    System.out.println(LINE);
+    System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + LINE + ConsoleColors.RESET);
+    System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + HEADER+ ConsoleColors.RESET);
+    System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + LINE + ConsoleColors.RESET);
   }
 
   public void showAllMenu() {
-    System.out.println(LINE);
+    System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + LINE + ConsoleColors.RESET);
     System.out.println(SHOW_ALL_MENU1);
+    System.out.println();
     if (Task.getGeneral()) {
       System.out.println(SHOW_ALL_MENU_GENERAL);
     } else {
       System.out.println(SHOW_ALL_MENU_USER);
     }
-    System.out.println(LINE);
+    System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + LINE + ConsoleColors.RESET);
   }
 
   public static void changeUser(List<Task> tasks) throws IOException {
@@ -200,7 +224,7 @@ public class MenuTui {
       if (task.getDeleted()) {
         continue;
       }
-      String taskRow = String.format("|%4d|%10s|%10s|%25s|%10s|%10s|%8s|%9s|%6s|",
+      String taskRow = String.format("|%4d|%10s|%10s|%35s|%11s|%11s|%12s|%13s|%9s|",
           task.getID(), task.getAuthor(), task.getExecutor(), title, task.getStartTime(),
           task.getFinishTime(), task.getPriority(), task.getDifficult(), task.getStatus());
       System.out.println(taskRow);

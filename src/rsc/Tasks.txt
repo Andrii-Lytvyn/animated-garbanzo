@@ -1,5 +1,6 @@
 1,user,Mr.Fox,Clean table,01.02.2023,03.02.2023,true,false,false,false
 2,user,Paspartu,Add Try-Catch,04.02.2023,05.02.2023,true,true,false,false
+3,user,user,Add Try-Catch,04.02.2023,05.02.2023,true,true,false,false
 4,general,Paspartu,Wash MR.Fox's CAR!!!,05.02.2023,06.02.2023,true,true,false,false
 5,general,Paspartu,go home,07.02.2023,07.02.2023,false,false,false,false
 6,user,litvin,newTest,11.02.2023,21.02.2023,false,false,false,false

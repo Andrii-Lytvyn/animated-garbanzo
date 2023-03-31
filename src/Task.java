@@ -163,9 +163,7 @@ public class Task {
       users.put(temp[0], temp[1]);
       userNames.add(temp[0]);
     }
-    System.out.println();
-    System.out.println(ConsoleColors.WHITE_UNDERLINED + "Welcome to TODO list!" + ConsoleColors.RESET);
-    System.out.println();
+
 
     System.out.print(ConsoleColors.WHITE_BRIGHT + "Enter" +ConsoleColors.WHITE_BOLD_BRIGHT +" Login: "+ ConsoleColors.RESET);
     String login = br.readLine();

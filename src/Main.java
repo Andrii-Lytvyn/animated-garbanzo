@@ -14,10 +14,12 @@ public class Main {
       Task task = new Task();
       File tasksFile = new File("src/rsc/Tasks.txt");
       File usersFile = new File("src/rsc/Users.txt");
+      System.out.println();
+      System.out.println(ConsoleColors.WHITE_UNDERLINED + "Welcome to TODO list!" + ConsoleColors.RESET);
+      System.out.println();
       task.showLogin(usersFile,tasksFile);
       MenuTui menu = new MenuTui();
       int delay = 200; // number of milliseconds to sleep
-
       long start = System.currentTimeMillis();
       while(start >= System.currentTimeMillis() - delay); // do nothing
 
