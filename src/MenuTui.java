@@ -156,6 +156,7 @@ public class MenuTui {
           break;
         }
         case "g": {
+          refresh(tasks);
           if (Task.getGeneral()) {
             Gant gant = new Gant();
             gant.printHead();
@@ -166,7 +167,7 @@ public class MenuTui {
             gant.printLine();
             System.out.println();
             System.out.println("Q - Quit");
-            while(true){
+            while (true) {
               String quit = br.readLine();
               if (quit != "") {
                 break;
@@ -210,34 +211,44 @@ public class MenuTui {
     task.showLogin(usersFile, tasksFile);
   }
 
-  public static void showAll(List<Task> tasks) {
-    String priority = "Low";
-    String difficult = "Low";
-    String status = "Low";
+  public static void showAll(List<Task> tasks) throws IOException, ParseException {
+
 //    tasks.sort(new TaskByIdComparator());
     for (Task task : tasks) { //cut long Titles
       String title = task.getTitle();
       if (title.length() > 33) {
         title = title.substring(0, 29) + "...";
       }
-      if (task.getDeleted()) {
-        continue;
+        String priority = "Low";
+        String difficult = "Low";
+        String status = "Process";
+        if (!Task.getGeneral()) {
+          if (task.getExecutor().equals("general")) {
+            continue;
+          }
+        }
+        if (title.length() > 25) {
+          title = title.substring(0, 22) + "...";
+        }
+        if (task.getDeleted()) {
+          continue;
+        }
+        if (task.getPriority()) {
+          priority = "High";
+        }
+        if (task.getDifficult()) {
+          difficult = "High";
+        }
+        if (task.getStatus()) {
+          status = "Finished";
+        }
+        String taskRow = String.format("|%4d|%10s|%10s|%35s|%11s|%11s|%12s|%13s|%9s|",
+            task.getID(), task.getAuthor(), task.getExecutor(), title, task.getStartTime(),
+            task.getFinishTime(), priority, difficult, status);
+        System.out.println(taskRow);
       }
-      if (task.getPriority()) {
-        priority = "High";
-      }
-      if (task.getDifficult()) {
-        difficult = "High";
-      }
-      if (task.getStatus()) {
-        status = "High";
-      }
-      String taskRow = String.format("|%4d|%10s|%10s|%35s|%11s|%11s|%12s|%13s|%9s|",
-          task.getID(), task.getAuthor(), task.getExecutor(), title, task.getStartTime(),
-          task.getFinishTime(), priority, difficult, status);
-      System.out.println(taskRow);
     }
-  }
+
 
   public static void readTask(List<Task> tasks, int id) throws IOException {
     for (Task task : tasks) {
@@ -404,13 +415,14 @@ public class MenuTui {
               task.setPriority(prior);
             }
           }
+          System.out.println("N1");
           break;
         }
         case "5": {
           for (Task task : tasks) {
             if (task.getID() == id) {
               String difficult = "Low";
-              if (!task.getDifficult()) {
+              if (task.getDifficult()) {
                 difficult = "High";
               }
               System.out.printf("Difficult: %s%n", difficult);
@@ -481,4 +493,5 @@ public class MenuTui {
 
   }
 }
+
 

@@ -9,5 +9,5 @@
 2,user1,user1,Create output table; choose color scheme; add changeUser(),21.03.2023,31.03.2023,false,false,false,false
 4,general,user2,Write writeFile(),02.03.2023,05.03.2023,false,false,false,false
 7,general,user2,Write key scan,06.03.2023,10.03.2023,true,false,false,false
-9,user2,user2,Add delete(),11.03.2023,20.03.2023,false,false,false,false
+9,user2,user2,Add delete(),11.03.2023,20.03.2023,false,true,false,false
 11,user2,user2,Add editTask(),20.03.2023,28.03.2023,false,false,false,false
