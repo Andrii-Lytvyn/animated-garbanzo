@@ -1,46 +1,44 @@
 import java.text.DateFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.util.Comparator;
-import java.util.Date;
+import java.util.*;
 import java.awt.*;
 import java.awt.event.KeyEvent;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStreamReader;
-
 import java.util.List;
 
 public class MenuTui {
   public static DateFormat formatter = new SimpleDateFormat("dd.MM.yyyy");
-public static final String LINE =     "=============================================================================================================================";
+  public static final String LINE = "=============================================================================================================================";
   public static final String HEADER = "| ID |  Author  | Executor |              Title                |   Start   |  Finish   |  Priority  |  Difficult  |  Status |";
   public static final String SHOW_ALL_MENU1 = ""
-          + ConsoleColors.YELLOW + "|SORT BY:         " + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " 1-Author " + ConsoleColors.RESET + " "
-          + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " 2-Executor " + ConsoleColors.RESET+ " "
-          + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " 3-Title " + ConsoleColors.RESET+ " "
-          + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " 4-Priority " + ConsoleColors.RESET+ " "
-          + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " 5-Difficult " + ConsoleColors.RESET+ " "
-          + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " 6-Status " + ConsoleColors.RESET+ " "
-          + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " 7-StartDate " + ConsoleColors.RESET+ " "
-          + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " 8-FinishDate " + ConsoleColors.RESET+ " "
-          + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " 9-Id " + ConsoleColors.RESET+ " " ;
+      + ConsoleColors.YELLOW + "|SORT BY:         " + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT + " 1-Author " + ConsoleColors.RESET + " "
+      + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT + " 2-Executor " + ConsoleColors.RESET + " "
+      + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT + " 3-Title " + ConsoleColors.RESET + " "
+      + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT + " 4-Priority " + ConsoleColors.RESET + " "
+      + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT + " 5-Difficult " + ConsoleColors.RESET + " "
+      + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT + " 6-Status " + ConsoleColors.RESET + " "
+      + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT + " 7-StartDate " + ConsoleColors.RESET + " "
+      + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT + " 8-FinishDate " + ConsoleColors.RESET + " "
+      + ConsoleColors.YELLOW_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT + " 9-Id " + ConsoleColors.RESET + " ";
   public static final String SHOW_ALL_MENU_GENERAL = ConsoleColors.BLUE + "|COMMANDS:        "
-          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " C-CHANGE USER " + ConsoleColors.RESET+ " "
-          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " R-READ " + ConsoleColors.RESET+ " "
-          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " A-ADD " + ConsoleColors.RESET+ " "
-          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " D-DEL " + ConsoleColors.RESET+ " "
-          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " F-FINISH " + ConsoleColors.RESET+ " "
-          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " G-GUNT " + ConsoleColors.RESET+ " "
-          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " Q-QUIT " + ConsoleColors.RESET+ " ";
+      + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT + " C-CHANGE USER " + ConsoleColors.RESET + " "
+      + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT + " R-READ " + ConsoleColors.RESET + " "
+      + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT + " A-ADD " + ConsoleColors.RESET + " "
+      + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT + " D-DEL " + ConsoleColors.RESET + " "
+      + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT + " F-FINISH " + ConsoleColors.RESET + " "
+      + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT + " G-GUNT " + ConsoleColors.RESET + " "
+      + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT + " Q-QUIT " + ConsoleColors.RESET + " ";
   public static final String SHOW_ALL_MENU_USER = ConsoleColors.BLUE + "|COMMANDS:        "
-          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " C-CHANGE USER " + ConsoleColors.RESET+ " "
-          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " R-READ " + ConsoleColors.RESET+ " "
-          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " A-ADD " + ConsoleColors.RESET+ " "
-          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " D-DEL " + ConsoleColors.RESET+ " "
-          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " F-FINISH " + ConsoleColors.RESET+ " "
-          + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT+ " Q-QUIT " + ConsoleColors.RESET+ " ";
+      + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT + " C-CHANGE USER " + ConsoleColors.RESET + " "
+      + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT + " R-READ " + ConsoleColors.RESET + " "
+      + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT + " A-ADD " + ConsoleColors.RESET + " "
+      + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT + " D-DEL " + ConsoleColors.RESET + " "
+      + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT + " F-FINISH " + ConsoleColors.RESET + " "
+      + ConsoleColors.BLUE_BACKGROUND + ConsoleColors.WHITE_BOLD_BRIGHT + " Q-QUIT " + ConsoleColors.RESET + " ";
 
   public static Task task = new Task();
 
@@ -83,7 +81,8 @@ public static final String LINE =     "=========================================
         }
         case "2": {
           Comparator<Task> comparator = new TaskByExecutorComparator();
-          tasks.sort(comparator);
+          Collections.sort(tasks, comparator);
+//          tasks.sort(comparator);
           printHeader();
           showAll(tasks);
           showAllMenu();
@@ -174,7 +173,7 @@ public static final String LINE =     "=========================================
           if (Task.getGeneral()) {
             Gant gant = new Gant();
             gant.printHead();
-            tasks.sort(new TaskByIdComparator());
+//            tasks.sort(new TaskByIdComparator());
             for (Task task : tasks) {
               gant.printTask(task);
             }
@@ -189,7 +188,7 @@ public static final String LINE =     "=========================================
 
   public static void printHeader() {
     System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + LINE + ConsoleColors.RESET);
-    System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + HEADER+ ConsoleColors.RESET);
+    System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + HEADER + ConsoleColors.RESET);
     System.out.println(ConsoleColors.WHITE_BOLD_BRIGHT + LINE + ConsoleColors.RESET);
   }
 
@@ -214,8 +213,10 @@ public static final String LINE =     "=========================================
   }
 
   public static void showAll(List<Task> tasks) {
-
-    tasks.sort(new TaskByIdComparator());
+    String priority = "Low";
+    String difficult = "Low";
+    String status = "Low";
+//    tasks.sort(new TaskByIdComparator());
     for (Task task : tasks) { //cut long Titles
       String title = task.getTitle();
       if (title.length() > 25) {
@@ -224,9 +225,18 @@ public static final String LINE =     "=========================================
       if (task.getDeleted()) {
         continue;
       }
+      if (task.getPriority()) {
+        priority = "High";
+      }
+      if (task.getDifficult()) {
+        difficult = "High";
+      }
+      if (task.getStatus()) {
+        status = "High";
+      }
       String taskRow = String.format("|%4d|%10s|%10s|%35s|%11s|%11s|%12s|%13s|%9s|",
           task.getID(), task.getAuthor(), task.getExecutor(), title, task.getStartTime(),
-          task.getFinishTime(), task.getPriority(), task.getDifficult(), task.getStatus());
+          task.getFinishTime(), priority, difficult, status);
       System.out.println(taskRow);
     }
   }
@@ -460,6 +470,7 @@ public static final String LINE =     "=========================================
     }
     return result;
   }
+
   public static void mainMenu(MenuTui menu, Task task) throws IOException, ParseException, AWTException {
     menu.clearAll();
     System.out.println();
