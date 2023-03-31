@@ -10,12 +10,6 @@ public class Main {
 
   public static void main(String[] args) throws IOException {
 
-
-
-
-
-
-
     try {
       Task task = new Task();
       File tasksFile = new File("src/rsc/Tasks.txt");
@@ -26,6 +20,7 @@ public class Main {
 
       long start = System.currentTimeMillis();
       while(start >= System.currentTimeMillis() - delay); // do nothing
+
 
       menu.printHeader();
       menu.showAll(task.tasks);

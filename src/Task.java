@@ -164,9 +164,12 @@ public class Task {
       userNames.add(temp[0]);
     }
     System.out.println();
-    System.out.print("Login: ");
+    System.out.println(ConsoleColors.WHITE_UNDERLINED + "Welcome to TODO list!" + ConsoleColors.RESET);
+    System.out.println();
+
+    System.out.print(ConsoleColors.WHITE_BRIGHT + "Enter" +ConsoleColors.WHITE_BOLD_BRIGHT +" Login: "+ ConsoleColors.RESET);
     String login = br.readLine();
-    System.out.print("Password: ");
+    System.out.print(ConsoleColors.WHITE_BRIGHT + "Enter" +ConsoleColors.WHITE_BOLD_BRIGHT +" Password: "+ ConsoleColors.RESET);
     String password = br.readLine();
     try {
       if (users.get(login).equals(password)) {
