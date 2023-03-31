@@ -65,7 +65,7 @@ public class MenuTui {
 //  ChangeUser -- Andrii Golik
 //  Exit   -- Andrii Golik!!!
 
-  public void taskMenu(List<Task> tasks) throws IOException, ParseException {
+  public void taskMenu(List<Task> tasks) throws IOException, ParseException, AWTException {
     BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
     while (true) {
       System.out.print("Choose command: ");
@@ -163,6 +163,7 @@ public class MenuTui {
               gant.printTask(task);
             }
             gant.printLine();
+            System.out.println();
             System.out.println("Q - Quit");
             while(true){
               String quit = br.readLine();
@@ -465,7 +466,8 @@ public class MenuTui {
     return result;
   }
 
-  public void refresh(List<Task> tasks) throws IOException, ParseException {
+  public void refresh(List<Task> tasks) throws IOException, ParseException, AWTException {
+    clearAll();
     int delay = 200; // number of milliseconds to sleep
     long start = System.currentTimeMillis();
     while (start >= System.currentTimeMillis() - delay) ; // do nothing

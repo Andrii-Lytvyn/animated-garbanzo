@@ -1,7 +1,13 @@
-1,user,Mr.Fox,Clean table,01.02.2023,03.02.2023,true,false,false,false
-2,user,Paspartu,Add Try-Catch,04.02.2023,05.02.2023,true,true,false,false
-3,user,user,Add Try-Catch,04.02.2023,05.02.2023,true,true,false,false
-4,general,Paspartu,Wash MR.Fox's CAR!!!,05.02.2023,06.02.2023,true,true,false,false
-5,general,Paspartu,go home,07.02.2023,07.02.2023,false,false,false,false
-6,user,litvin,newTest,11.02.2023,21.02.2023,false,false,false,false
-7,general,Andrii,add delete 252525252525252525252525225252525252525,10.01.2003,20.02.2012,false,false,false,false
+1,general,general,Arrange tasks for team,01.03.2023,02.03.2023,true,false,false,false
+3,general,general,Find money for workers :),01.03.2023,15.03.2023,true,false,false,false
+12,general,general,Control progress,16.03.2023,29.03.2023,true,false,false,false
+13,general,general,Check result,30.03.2023,31.03.2023,true,false,false,false
+8,general,user1,Write readFile(),02.03.2023,07.03.2023,true,true,false,false
+5,user1,user1,Write UI,06.03.2023,19.03.2023,false,false,false,false
+10,user1,user1,Add newTask(),11.03.2023,21.03.2023,false,false,false,false
+6,general,user1,Write main cycle,19.03.2023,28.03.2023,false,true,true,false
+2,user1,user1,Create output table; choose color scheme; add changeUser(),21.03.2023,31.03.2023,false,false,false,false
+4,general,user2,Write writeFile(),02.03.2023,05.03.2023,false,false,false,false
+7,general,user2,Write key scan,06.03.2023,10.03.2023,true,false,false,false
+9,user2,user2,Add delete(),11.03.2023,20.03.2023,false,false,false,false
+11,user2,user2,Add editTask(),20.03.2023,28.03.2023,false,false,false,false

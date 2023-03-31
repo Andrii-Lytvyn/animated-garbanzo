@@ -27,10 +27,12 @@ public class Main {
         System.err.println("File not found: " + e.getMessage());
       } catch(IOException | ParseException e){
         System.err.println("Input/output exception: " + e.getMessage());
-      }
+      } catch (AWTException e) {
+      throw new RuntimeException(e);
     }
+  }
 
-    public static void redrawAll (Task task) throws IOException, ParseException {
+    public static void redrawAll (Task task) throws IOException, ParseException, AWTException {
       MenuTui menu = new MenuTui();
       int delay = 200; // number of milliseconds to sleep
       long start = System.currentTimeMillis();
