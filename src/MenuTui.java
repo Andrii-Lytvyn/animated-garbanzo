@@ -74,90 +74,75 @@ public class MenuTui {
         case "1": {
           Comparator<Task> comparator = new TaskByAutorComparator();
           tasks.sort(comparator);
-          printHeader();
-          showAll(tasks);
-          showAllMenu();
+          refresh(tasks);
           break;
         }
         case "2": {
           Comparator<Task> comparator = new TaskByExecutorComparator();
           Collections.sort(tasks, comparator);
-//          tasks.sort(comparator);
-          printHeader();
-          showAll(tasks);
-          showAllMenu();
+          refresh(tasks);
           break;
         }
         case "3": {
           Comparator<Task> comparator = new TaskByTitleComparator();
-          tasks.sort(comparator);
-          printHeader();
-          showAll(tasks);
-          showAllMenu();
+          Collections.sort(tasks, comparator);
+          refresh(tasks);
           break;
         }
         case "4": {
           Comparator<Task> comparator = new TaskByPriorityComparator();
           tasks.sort(comparator);
-          printHeader();
-          showAll(tasks);
-          showAllMenu();
+          refresh(tasks);
           break;
         }
         case "5": {
           Comparator<Task> comparator = new TaskByDifficultComparator();
           tasks.sort(comparator);
-          printHeader();
-          showAll(tasks);
-          showAllMenu();
+          refresh(tasks);
           break;
         }
         case "6": {
           Comparator<Task> comparator = new TaskByStatusComparator();
           tasks.sort(comparator);
-          printHeader();
-          showAll(tasks);
-          showAllMenu();
+          refresh(tasks);
           break;
         }
         case "7": {
           Comparator<Task> comparator = new TaskByStartDateComparator();
           tasks.sort(comparator);
-          printHeader();
-          showAll(tasks);
-          showAllMenu();
+          refresh(tasks);
           break;
         }
         case "8": {
           Comparator<Task> comparator = new TaskByFinishDateComparator();
           tasks.sort(comparator);
-          printHeader();
-          showAll(tasks);
-          showAllMenu();
+          refresh(tasks);
           break;
         }
         case "9": {
           Comparator<Task> comparator1 = new TaskByIdComparator();
           tasks.sort(comparator1);
-          printHeader();
-          showAll(tasks);
-          showAllMenu();
+          refresh(tasks);
           break;
         }
         case "c": {
           changeUser(tasks);
+          refresh(tasks);
           break;
         }
         case "a": {
           addTask(tasks);
+          refresh(tasks);
           break;
         }
         case "d": {
           deleteTask(tasks);
+          refresh(tasks);
           break;
         }
         case "f": {
           finishTask(tasks);
+          refresh(tasks);
           break;
         }
         case "r": {
@@ -166,7 +151,7 @@ public class MenuTui {
           if (checkIdInRange(tasks, id)) {
             readTask(tasks, id);
           }
-
+          refresh(tasks);
           break;
         }
         case "g": {
@@ -177,7 +162,16 @@ public class MenuTui {
             for (Task task : tasks) {
               gant.printTask(task);
             }
+            gant.printLine();
+            System.out.println("Q - Quit");
+            while(true){
+              String quit = br.readLine();
+              if (quit != "") {
+                break;
+              }
+            }
           }
+          refresh(tasks);
         }
         case "q": {
           return;
@@ -471,13 +465,14 @@ public class MenuTui {
     return result;
   }
 
-  public static void mainMenu(MenuTui menu, Task task) throws IOException, ParseException, AWTException {
-    menu.clearAll();
-    System.out.println();
-    menu.printHeader();
-    menu.showAll(task.tasks);
-    menu.showAllMenu();
-    //menu.mainMenu(task.tasks);
+  public void refresh(List<Task> tasks) throws IOException, ParseException {
+    int delay = 200; // number of milliseconds to sleep
+    long start = System.currentTimeMillis();
+    while (start >= System.currentTimeMillis() - delay) ; // do nothing
+    printHeader();
+    showAll(tasks);
+    showAllMenu();
+    taskMenu(tasks);
 
   }
 }

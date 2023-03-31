@@ -27,11 +27,12 @@ public class Gant {
   }
 
   public void printHead() {
-    for (int i = 0; i < 117; ++i) {
-      System.out.print("-");
-    }
+    printLine();
+//    for (int i = 0; i < 132; ++i) {
+//      System.out.print("-");
+//    }
     System.out.println();
-    System.out.print("|        Task title       |");
+    System.out.print("|        Task title       ||          |");
     for (int i = 1; i <= 31; i++) {
       if (i < 10) {
         System.out.print("0" + i + "|");
@@ -40,9 +41,10 @@ public class Gant {
       }
     }
     System.out.println();
-    for (int i = 0; i < 117; ++i) {
-      System.out.print("-");
-    }
+    printLine();
+//    for (int i = 0; i < 132; ++i) {
+//      System.out.print("-");
+//    }
     System.out.println();
   }
 
@@ -63,7 +65,7 @@ public class Gant {
     int indexFinish = finishDate.indexOf(SEP);
     int finish = Integer.parseInt(finishDate.substring(0, indexFinish));
 
-    String[] line = new String[32]; // 32 cells in one row
+    String[] line = new String[33]; // 32 cells in one row
     for (int i = 1; i < line.length; ++i) {
       line[i] = "   ";
     }
@@ -79,6 +81,8 @@ public class Gant {
       title = title.substring(0, 22) + "...";
     }
     line[0] = String.format("|%25s|", title);
+    String executor = task.getExecutor();
+    line[1] = String.format("|%10s|", executor);
 
     complSign = color + complSign + colorReset;
     if (task.getDifficult() == false) {
@@ -88,7 +92,7 @@ public class Gant {
     }
 
     for (int k = start; k <= finish; ++k) { // fill line with task sign
-      line[k] = complSign;
+      line[k + 1] = complSign;
     }
 
     for (int j = 0; j < line.length; ++j) {
@@ -97,8 +101,11 @@ public class Gant {
     System.out.println("\u001B[0m");
   }
 
-  public void gantMenu() {
-    System.out.println("S - SHOW ALL TASKS,    Q - QUIT");
+  public void printLine(){
+    for (int i = 0; i < 132; ++i) {
+      System.out.print("-");
+    }
   }
+
 }
 
